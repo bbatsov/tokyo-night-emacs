@@ -8,4 +8,6 @@
 * Comprehensive face coverage for built-in Emacs faces and packages.
 * Third-party package support: magit, transient, vertico, corfu, marginalia,
   orderless, consult, embark, company, ivy, swiper, flycheck, which-key,
-  rainbow-delimiters, markdown-mode, helpful, avy.
+  rainbow-delimiters, markdown-mode, helpful, avy, ace-window, cider,
+  doom-modeline, elfeed, forge, hydra, lsp-mode, lsp-ui, smartparens,
+  treemacs, web-mode.
