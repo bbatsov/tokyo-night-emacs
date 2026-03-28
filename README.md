@@ -73,6 +73,15 @@ To tweak individual scaling factors, use `custom-set-faces` after loading:
  '(org-level-2 ((t (:height 1.3)))))
 ```
 
+For a more visible current line highlight, use `tokyo-bg-highlight`
+instead of the default subtle `tokyo-bg-line`:
+
+```emacs-lisp
+(setq tokyo-themes-override-colors-alist
+      '(("tokyo-bg-line" . "#292e42")))  ; same as tokyo-bg-highlight
+(load-theme 'tokyo-night t)
+```
+
 ## Design
 
 See [DESIGN.md](DESIGN.md) for the guiding principles behind color
