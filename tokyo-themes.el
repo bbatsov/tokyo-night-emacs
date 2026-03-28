@@ -34,24 +34,24 @@
 
 (require 'cl-lib)
 
-(defgroup tokyo-night-themes nil
+(defgroup tokyo-themes nil
   "Tokyo Night theme family."
   :group 'faces
   :prefix "tokyo-night-"
   :link '(url-link :tag "GitHub" "https://github.com/bbatsov/emacs-tokyo-themes")
   :tag "Tokyo Night")
 
-(defcustom tokyo-night-override-colors-alist '()
+(defcustom tokyo-themes-override-colors-alist '()
   "Alist of color overrides applied to all variants.
 Each entry should be a cons cell (NAME . VALUE) where NAME is a
 color name from any variant's palette and VALUE is the
 replacement hex color string."
   :type '(alist :key-type string :value-type string)
-  :group 'tokyo-night-themes)
+  :group 'tokyo-themes)
 
 ;;; Color Palettes
 
-(defvar tokyo-night-night-colors-alist
+(defvar tokyo-night-colors-alist
   '(;; Background shades
     ("tn-bg-darkest"    . "#0C0E14")
     ("tn-bg-dark"       . "#16161e")
@@ -118,7 +118,7 @@ replacement hex color string."
   "The Tokyo Night (night) color palette.
 Darkest background variant.")
 
-(defvar tokyo-night-storm-colors-alist
+(defvar tokyo-storm-colors-alist
   '(;; Background shades
     ("tn-bg-darkest"    . "#1b1e2d")
     ("tn-bg-dark"       . "#1f2335")
@@ -185,7 +185,7 @@ Darkest background variant.")
   "The Tokyo Night (storm) color palette.
 Medium background variant, same accents as night.")
 
-(defvar tokyo-night-moon-colors-alist
+(defvar tokyo-moon-colors-alist
   '(;; Background shades
     ("tn-bg-darkest"    . "#191b29")
     ("tn-bg-dark"       . "#1e2030")
@@ -252,7 +252,7 @@ Medium background variant, same accents as night.")
   "The Tokyo Night (moon) color palette.
 Blue-tinted dark variant with unique accents.")
 
-(defvar tokyo-night-day-colors-alist
+(defvar tokyo-day-colors-alist
   '(;; Background shades
     ("tn-bg-darkest"    . "#c1c9df")
     ("tn-bg-dark"       . "#d0d5e3")
@@ -321,9 +321,9 @@ Light variant.")
 
 ;;; Face Application
 
-(defun tokyo-night--apply-theme (theme-name colors-alist)
+(defun tokyo--apply-theme (theme-name colors-alist)
   "Apply the Tokyo Night face definitions to THEME-NAME using COLORS-ALIST."
-  (let* ((merged (append tokyo-night-override-colors-alist colors-alist))
+  (let* ((merged (append tokyo-themes-override-colors-alist colors-alist))
          (class '((class color) (min-colors 89))))
     (cl-flet ((c (name) (cdr (assoc name merged))))
       (let ((tn-bg-darkest    (c "tn-bg-darkest"))

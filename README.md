@@ -7,9 +7,9 @@ All four variants are included:
 | Theme | Background | Description |
 |-------|-----------|-------------|
 | `tokyo-night` | `#1a1b26` | The darkest variant (default) |
-| `tokyo-night-storm` | `#24283b` | Medium dark |
-| `tokyo-night-moon` | `#222436` | Blue-tinted dark, unique accents |
-| `tokyo-night-day` | `#e1e2e7` | Light variant |
+| `tokyo-storm` | `#24283b` | Medium dark |
+| `tokyo-moon` | `#222436` | Blue-tinted dark, unique accents |
+| `tokyo-day` | `#e1e2e7` | Light variant |
 
 ## Installation
 
@@ -24,7 +24,7 @@ All four variants are included:
 
 ```emacs-lisp
 (use-package tokyo-themes
-  :vc (:url "https://github.com/bbatsov/emacs-tokyo-themes")
+  :vc (:url "https://github.com/bbatsov/emacs-tokyo-themes" :rev :newest)
   :config
   (load-theme 'tokyo-night t))
 ```
@@ -37,20 +37,20 @@ Drop all `.el` files somewhere on your `load-path` and `custom-theme-load-path`,
 (load-theme 'tokyo-night t)
 ```
 
-Replace `tokyo-night` with `tokyo-night-storm`, `tokyo-night-moon`, or
-`tokyo-night-day` to use a different variant.
+Replace `tokyo-night` with `tokyo-storm`, `tokyo-moon`, or
+`tokyo-day` to use a different variant.
 
 ## Customization
 
 You can override individual colors without forking:
 
 ```emacs-lisp
-(setq tokyo-night-override-colors-alist
+(setq tokyo-themes-override-colors-alist
       '(("tn-comment" . "#636da6")))  ; brighter comments
 (load-theme 'tokyo-night t)
 ```
 
-Overrides apply to all variants. See the `tokyo-night-*-colors-alist`
+Overrides apply to all variants. See the `tokyo-*-colors-alist`
 variables in `tokyo-themes.el` for all available color names.
 
 ## Credits

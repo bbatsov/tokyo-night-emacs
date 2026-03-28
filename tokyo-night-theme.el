@@ -32,7 +32,7 @@
 
 (deftheme tokyo-night "A clean dark theme inspired by Tokyo city lights.")
 
-(tokyo-night--apply-theme 'tokyo-night tokyo-night-night-colors-alist)
+(tokyo--apply-theme 'tokyo-night tokyo-night-colors-alist)
 
 ;;;###autoload
 (and load-file-name
