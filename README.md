@@ -64,6 +64,15 @@ To disable scaled headings in org, outline, markdown, shr, and info:
 (load-theme 'tokyo-night t)
 ```
 
+To tweak individual scaling factors, use `custom-set-faces` after loading:
+
+```emacs-lisp
+(load-theme 'tokyo-night t)
+(custom-set-faces
+ '(org-level-1 ((t (:height 1.5))))
+ '(org-level-2 ((t (:height 1.3)))))
+```
+
 ## Design
 
 See [DESIGN.md](DESIGN.md) for the guiding principles behind color
