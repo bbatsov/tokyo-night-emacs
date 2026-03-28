@@ -4,6 +4,8 @@
 
 A faithful Emacs port of [folke's Tokyo Night](https://github.com/folke/tokyonight.nvim) color theme.
 
+![Tokyo Storm](screenshots/tokyo-storm.png)
+
 All four variants are included:
 
 | Theme | Background | Description |
