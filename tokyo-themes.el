@@ -38,7 +38,7 @@
 (defgroup tokyo-themes nil
   "Tokyo Night theme family."
   :group 'faces
-  :prefix "tokyo-night-"
+  :prefix "tokyo-"
   :link '(url-link :tag "GitHub" "https://github.com/bbatsov/emacs-tokyo-themes")
   :tag "Tokyo Night")
 
@@ -58,7 +58,7 @@ replacement hex color string."
 
 ;;; Color Palettes
 
-(defvar tokyo-night-colors-alist
+(defconst tokyo-night-colors-alist
   '(;; Background shades
     ("tokyo-bg-darkest"    . "#0C0E14")
     ("tokyo-bg-dark"       . "#16161e")
@@ -125,7 +125,7 @@ replacement hex color string."
   "The Tokyo Night (night) color palette.
 Darkest background variant.")
 
-(defvar tokyo-storm-colors-alist
+(defconst tokyo-storm-colors-alist
   '(;; Background shades
     ("tokyo-bg-darkest"    . "#1b1e2d")
     ("tokyo-bg-dark"       . "#1f2335")
@@ -192,7 +192,7 @@ Darkest background variant.")
   "The Tokyo Night (storm) color palette.
 Medium background variant, same accents as night.")
 
-(defvar tokyo-moon-colors-alist
+(defconst tokyo-moon-colors-alist
   '(;; Background shades
     ("tokyo-bg-darkest"    . "#191b29")
     ("tokyo-bg-dark"       . "#1e2030")
@@ -259,7 +259,7 @@ Medium background variant, same accents as night.")
   "The Tokyo Night (moon) color palette.
 Blue-tinted dark variant with unique accents.")
 
-(defvar tokyo-day-colors-alist
+(defconst tokyo-day-colors-alist
   '(;; Background shades
     ("tokyo-bg-darkest"    . "#c1c9df")
     ("tokyo-bg-dark"       . "#d0d5e3")
@@ -331,7 +331,7 @@ Light variant.")
 (defun tokyo--apply-theme (theme-name colors-alist)
   "Apply the Tokyo Night face definitions to THEME-NAME using COLORS-ALIST."
   (let* ((merged (append tokyo-themes-override-colors-alist colors-alist))
-         (class '((class color) (min-colors 89))))
+         (class '((class color) (min-colors 88))))
     (cl-flet ((c (name) (cdr (assoc name merged))))
       (let ((tokyo-bg-darkest    (c "tokyo-bg-darkest"))
             (tokyo-bg-dark       (c "tokyo-bg-dark"))
@@ -411,7 +411,7 @@ Light variant.")
          `(menu ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark))))
          `(shadow ((,class (:foreground ,tokyo-comment))))
          `(region ((,class (:background ,tokyo-selection :extend t))))
-         `(secondary-selection ((,class (:background ,tokyo-bg-highlight))))
+         `(secondary-selection ((,class (:background ,tokyo-bg-highlight :extend t))))
          `(trailing-whitespace ((,class (:background ,tokyo-red))))
          `(vertical-border ((,class (:foreground ,tokyo-terminal-blk))))
          `(window-divider ((,class (:foreground ,tokyo-terminal-blk))))
@@ -425,7 +425,6 @@ Light variant.")
 ;;;;; mode-line
          `(mode-line ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark
                                            :box (:line-width -1 :color ,tokyo-terminal-blk)))))
-         `(mode-line-active ((,class (:inherit mode-line))))
          `(mode-line-inactive ((,class (:foreground ,tokyo-dark5 :background ,tokyo-bg-darkest
                                                     :box (:line-width -1 :color ,tokyo-bg-dark)))))
          `(mode-line-buffer-id ((,class (:foreground ,tokyo-blue :weight bold))))
@@ -532,9 +531,9 @@ Light variant.")
          `(diff-added ((,class (:foreground ,tokyo-git-add :background ,tokyo-diff-add-bg :extend t))))
          `(diff-removed ((,class (:foreground ,tokyo-git-delete :background ,tokyo-diff-del-bg :extend t))))
          `(diff-changed ((,class (:foreground ,tokyo-git-change :background ,tokyo-diff-chg-bg :extend t))))
-         `(diff-refine-added ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg :weight bold))))
-         `(diff-refine-removed ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg :weight bold))))
-         `(diff-refine-changed ((,class (:foreground ,tokyo-blue :background ,tokyo-diff-chg-bg :weight bold))))
+         `(diff-refine-added ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg :weight bold :extend t))))
+         `(diff-refine-removed ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg :weight bold :extend t))))
+         `(diff-refine-changed ((,class (:foreground ,tokyo-blue :background ,tokyo-diff-chg-bg :weight bold :extend t))))
          `(diff-header ((,class (:foreground ,tokyo-fg-dark :background ,tokyo-bg-dark :extend t))))
          `(diff-file-header ((,class (:foreground ,tokyo-blue :background ,tokyo-bg-dark :weight bold :extend t))))
          `(diff-hunk-header ((,class (:foreground ,tokyo-magenta :background ,tokyo-bg-dark :extend t))))
@@ -559,15 +558,15 @@ Light variant.")
          `(ediff-current-diff-A ((,class (:background ,tokyo-diff-del-bg :extend t))))
          `(ediff-current-diff-B ((,class (:background ,tokyo-diff-add-bg :extend t))))
          `(ediff-current-diff-C ((,class (:background ,tokyo-diff-chg-bg :extend t))))
-         `(ediff-fine-diff-A ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg :weight bold))))
-         `(ediff-fine-diff-B ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg :weight bold))))
-         `(ediff-fine-diff-C ((,class (:foreground ,tokyo-blue :background ,tokyo-diff-chg-bg :weight bold))))
-         `(ediff-even-diff-A ((,class (:background ,tokyo-bg-highlight))))
-         `(ediff-even-diff-B ((,class (:background ,tokyo-bg-highlight))))
-         `(ediff-even-diff-C ((,class (:background ,tokyo-bg-highlight))))
-         `(ediff-odd-diff-A ((,class (:background ,tokyo-bg-highlight))))
-         `(ediff-odd-diff-B ((,class (:background ,tokyo-bg-highlight))))
-         `(ediff-odd-diff-C ((,class (:background ,tokyo-bg-highlight))))
+         `(ediff-fine-diff-A ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg :weight bold :extend t))))
+         `(ediff-fine-diff-B ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg :weight bold :extend t))))
+         `(ediff-fine-diff-C ((,class (:foreground ,tokyo-blue :background ,tokyo-diff-chg-bg :weight bold :extend t))))
+         `(ediff-even-diff-A ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(ediff-even-diff-B ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(ediff-even-diff-C ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(ediff-odd-diff-A ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(ediff-odd-diff-B ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(ediff-odd-diff-C ((,class (:background ,tokyo-bg-highlight :extend t))))
 
 ;;;;; eshell
          `(eshell-prompt ((,class (:foreground ,tokyo-blue :weight bold))))
@@ -701,14 +700,14 @@ Light variant.")
          `(org-formula ((,class (:foreground ,tokyo-orange))))
          `(org-headline-done ((,class (:foreground ,tokyo-comment))))
          `(org-hide ((,class (:foreground ,tokyo-bg))))
-         `(org-level-1 ((,class (:foreground ,tokyo-heading1 :weight bold))))
-         `(org-level-2 ((,class (:foreground ,tokyo-heading2 :weight bold))))
-         `(org-level-3 ((,class (:foreground ,tokyo-heading3 :weight bold))))
-         `(org-level-4 ((,class (:foreground ,tokyo-heading4 :weight bold))))
-         `(org-level-5 ((,class (:foreground ,tokyo-heading5 :weight bold))))
-         `(org-level-6 ((,class (:foreground ,tokyo-heading6 :weight bold))))
-         `(org-level-7 ((,class (:foreground ,tokyo-fg-dark :weight bold))))
-         `(org-level-8 ((,class (:foreground ,tokyo-dark5 :weight bold))))
+         `(org-level-1 ((,class (:inherit outline-1))))
+         `(org-level-2 ((,class (:inherit outline-2))))
+         `(org-level-3 ((,class (:inherit outline-3))))
+         `(org-level-4 ((,class (:inherit outline-4))))
+         `(org-level-5 ((,class (:inherit outline-5))))
+         `(org-level-6 ((,class (:inherit outline-6))))
+         `(org-level-7 ((,class (:inherit outline-7))))
+         `(org-level-8 ((,class (:inherit outline-8))))
          `(org-link ((,class (:foreground ,tokyo-teal :underline t))))
          `(org-meta-line ((,class (:foreground ,tokyo-comment))))
          `(org-priority ((,class (:foreground ,tokyo-orange))))
@@ -905,9 +904,9 @@ Light variant.")
          `(smerge-markers ((,class (:foreground ,tokyo-comment :background ,tokyo-bg-dark :extend t))))
          `(smerge-upper ((,class (:background ,tokyo-diff-del-bg :extend t))))
          `(smerge-lower ((,class (:background ,tokyo-diff-add-bg :extend t))))
-         `(smerge-refined-added ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg :weight bold))))
-         `(smerge-refined-removed ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg :weight bold))))
-         `(smerge-refined-changed ((,class (:foreground ,tokyo-blue :background ,tokyo-diff-chg-bg :weight bold))))
+         `(smerge-refined-added ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg :weight bold :extend t))))
+         `(smerge-refined-removed ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg :weight bold :extend t))))
+         `(smerge-refined-changed ((,class (:foreground ,tokyo-blue :background ,tokyo-diff-chg-bg :weight bold :extend t))))
 
 ;;;; Third-party packages
 ;;;;; avy
@@ -958,7 +957,6 @@ Light variant.")
          `(consult-buffer ((,class (:foreground ,tokyo-fg))))
          `(consult-line-number-prefix ((,class (:foreground ,tokyo-dark5))))
          `(consult-line-number-wrapped ((,class (:foreground ,tokyo-orange))))
-         `(consult-help ((,class (:foreground ,tokyo-comment))))
 
 ;;;;; corfu
          `(corfu-default ((,class (:background ,tokyo-bg-dark))))
@@ -971,7 +969,6 @@ Light variant.")
 ;;;;; embark
          `(embark-keybinding ((,class (:foreground ,tokyo-blue :weight bold))))
          `(embark-keybinding-repeat ((,class (:foreground ,tokyo-magenta :weight bold))))
-         `(embark-keymap ((,class (:foreground ,tokyo-dark5))))
          `(embark-target ((,class (:foreground ,tokyo-orange :weight bold))))
          `(embark-verbose-indicator-documentation ((,class (:foreground ,tokyo-comment :slant italic))))
          `(embark-verbose-indicator-title ((,class (:foreground ,tokyo-fg :weight bold))))
@@ -1010,7 +1007,6 @@ Light variant.")
          `(git-commit-comment-branch-remote ((,class (:foreground ,tokyo-teal :weight bold))))
          `(git-commit-comment-detached ((,class (:foreground ,tokyo-orange :weight bold))))
          `(git-commit-comment-heading ((,class (:foreground ,tokyo-fg :weight bold))))
-         `(git-commit-comment-button ((,class (:foreground ,tokyo-blue :underline t))))
          `(git-commit-comment-file ((,class (:foreground ,tokyo-fg-dark))))
          `(git-commit-comment-action ((,class (:foreground ,tokyo-comment))))
 
@@ -1550,9 +1546,6 @@ Light variant.")
          `(web-mode-script-face ((,class (:background ,tokyo-bg-dark))))
          `(web-mode-style-face ((,class (:background ,tokyo-bg-dark))))
          `(web-mode-folded-face ((,class (:foreground ,tokyo-comment :underline t))))
-         `(web-mode-bold-face ((,class (:weight bold))))
-         `(web-mode-italic-face ((,class (:slant italic))))
-         `(web-mode-underline-face ((,class (:underline t))))
          `(web-mode-current-element-highlight-face ((,class (:background ,tokyo-bg-highlight))))
          `(web-mode-current-column-highlight-face ((,class (:background ,tokyo-bg-line))))
          `(web-mode-comment-keyword-face ((,class (:foreground ,tokyo-magenta-hot :weight bold))))
