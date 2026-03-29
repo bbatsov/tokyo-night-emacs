@@ -1563,6 +1563,51 @@ Light variant.")
 ;;;;; pdf-view
          `(pdf-view-midnight-colors '(,tokyo-fg . ,tokyo-bg)))))))
 
+;;; User Commands
+
+(defvar tokyo-themes--current nil
+  "The currently active Tokyo theme, or nil.")
+
+(defconst tokyo-themes--variants
+  '(tokyo-night tokyo-storm tokyo-moon tokyo-day)
+  "List of all Tokyo theme variants.")
+
+;;;###autoload
+(defun tokyo-themes-reload ()
+  "Reload the current Tokyo theme.
+Useful after changing `tokyo-themes-override-colors-alist' or
+`tokyo-themes-scale-headings' without having to call `load-theme'
+manually."
+  (interactive)
+  (if tokyo-themes--current
+      (load-theme tokyo-themes--current t)
+    (user-error "No Tokyo theme is currently active")))
+
+;;;###autoload
+(defun tokyo-themes-select ()
+  "Select and load a Tokyo theme variant interactively."
+  (interactive)
+  (let* ((names (mapcar #'symbol-name tokyo-themes--variants))
+         (choice (intern (completing-read "Tokyo theme: " names nil t))))
+    (mapc #'disable-theme tokyo-themes--variants)
+    (load-theme choice t)
+    (setq tokyo-themes--current choice)))
+
+(defun tokyo-themes--set-current (theme)
+  "Record THEME as the active Tokyo theme.
+Called from `enable-theme-functions'."
+  (when (memq theme tokyo-themes--variants)
+    (setq tokyo-themes--current theme)))
+
+(defun tokyo-themes--clear-current (theme)
+  "Clear the active Tokyo theme if THEME is being disabled.
+Called from `disable-theme-functions'."
+  (when (eq theme tokyo-themes--current)
+    (setq tokyo-themes--current nil)))
+
+(when (boundp 'enable-theme-functions)
+  (add-hook 'enable-theme-functions #'tokyo-themes--set-current)
+  (add-hook 'disable-theme-functions #'tokyo-themes--clear-current))
 
 (provide 'tokyo-themes)
 

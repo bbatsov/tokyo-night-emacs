@@ -1,4 +1,4 @@
-# Tokyo Night Theme for Emacs
+# Tokyo Themes for Emacs
 
 [![CI](https://github.com/bbatsov/emacs-tokyo-themes/actions/workflows/ci.yml/badge.svg)](https://github.com/bbatsov/emacs-tokyo-themes/actions/workflows/ci.yml)
 
@@ -43,6 +43,13 @@ Drop all `.el` files somewhere on your `load-path` and `custom-theme-load-path`,
 
 Replace `tokyo-night` with `tokyo-storm`, `tokyo-moon`, or
 `tokyo-day` to use a different variant.
+
+## Usage
+
+Switch between variants interactively with `M-x tokyo-themes-select`.
+
+After changing customization variables, apply them without restarting
+with `M-x tokyo-themes-reload`.
 
 ## Customization
 
@@ -109,6 +116,18 @@ all buffers), use `face-remap-add-relative` in a mode hook:
 These overrides are buffer-local and won't affect other modes. See
 [Buffer-Local Face Remapping with face-remap-add-relative](https://emacsredux.com/blog/2026/03/16/buffer-local-face-remapping-with-face-remap-add-relative/)
 for more details.
+
+## Supported Packages
+
+Beyond all built-in Emacs faces, the theme covers these packages:
+
+- **Completion:** vertico, corfu, marginalia, orderless, consult, embark, company, ivy, swiper
+- **Development:** magit, forge, transient, git-commit, git-rebase, eglot, lsp-mode, lsp-ui, flycheck, cider
+- **Editing:** smartparens, rainbow-delimiters, avy, ace-window, hydra, which-key
+- **UI:** doom-modeline, treemacs, helpful, markdown-mode, web-mode, elfeed
+
+Missing a package? [Open an issue](https://github.com/bbatsov/emacs-tokyo-themes/issues/new?template=feature_request.yml)
+or submit a PR.
 
 ## Design
 
