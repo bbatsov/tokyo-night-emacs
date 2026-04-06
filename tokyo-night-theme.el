@@ -20,15 +20,15 @@
 ;;; Commentary:
 
 ;; The "night" variant of Tokyo Night -- the darkest background.
-;; See `tokyo-themes.el' for the shared infrastructure.
+;; See `tokyo-night.el' for the shared infrastructure.
 
 ;;; Code:
 
-(require 'tokyo-themes)
+(require 'tokyo-night)
 
 (deftheme tokyo-night "A clean dark theme inspired by Tokyo city lights.")
 
-(tokyo--apply-theme 'tokyo-night tokyo-night-colors-alist)
+(tokyo-night--apply-theme 'tokyo-night tokyo-night-colors-alist)
 
 ;;;###autoload
 (and load-file-name

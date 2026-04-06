@@ -1,4 +1,4 @@
-;;; tokyo-moon-theme.el --- Tokyo Night theme (moon variant) -*- lexical-binding: t; -*-
+;;; tokyo-night-moon-theme.el --- Tokyo Night theme (moon variant) -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2026 Bozhidar Batsov
 
@@ -20,15 +20,15 @@
 ;;; Commentary:
 
 ;; The "moon" variant of Tokyo Night -- blue-tinted dark with unique accents.
-;; See `tokyo-themes.el' for the shared infrastructure.
+;; See `tokyo-night.el' for the shared infrastructure.
 
 ;;; Code:
 
-(require 'tokyo-themes)
+(require 'tokyo-night)
 
-(deftheme tokyo-moon "A blue-tinted dark theme inspired by Tokyo city lights (moon variant).")
+(deftheme tokyo-night-moon "A blue-tinted dark theme inspired by Tokyo city lights (moon variant).")
 
-(tokyo--apply-theme 'tokyo-moon tokyo-moon-colors-alist)
+(tokyo-night--apply-theme 'tokyo-night-moon tokyo-night-moon-colors-alist)
 
 ;;;###autoload
 (and load-file-name
@@ -37,13 +37,13 @@
                   (file-name-as-directory
                    (file-name-directory load-file-name))))
 
-(provide-theme 'tokyo-moon)
+(provide-theme 'tokyo-night-moon)
 
-(provide 'tokyo-moon-theme)
+(provide 'tokyo-night-moon-theme)
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; indent-tabs-mode: nil
 ;; End:
 
-;;; tokyo-moon-theme.el ends here
+;;; tokyo-night-moon-theme.el ends here

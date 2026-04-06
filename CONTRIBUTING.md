@@ -29,9 +29,9 @@ request. Please, try to follow these guidelines when you do so.
 * Open a [pull request][6] that relates to *only* one subject with a clear title
   and description in grammatically correct, complete sentences.
 
-[1]: https://github.com/bbatsov/emacs-tokyo-themes/issues
-[2]: https://github.com/bbatsov/emacs-tokyo-themes/blob/main/DESIGN.md
+[1]: https://github.com/bbatsov/tokyo-night-emacs/issues
+[2]: https://github.com/bbatsov/tokyo-night-emacs/blob/main/DESIGN.md
 [3]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-[4]: https://github.com/bbatsov/emacs-tokyo-themes/blob/main/CHANGELOG.md
+[4]: https://github.com/bbatsov/tokyo-night-emacs/blob/main/CHANGELOG.md
 [5]: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 [6]: https://help.github.com/articles/using-pull-requests

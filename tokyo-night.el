@@ -1,9 +1,9 @@
-;;; tokyo-themes.el --- Shared infrastructure for Tokyo Night themes -*- lexical-binding: t; -*-
+;;; tokyo-night.el --- Shared infrastructure for Tokyo Night themes -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2026 Bozhidar Batsov
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.dev>
-;; URL: https://github.com/bbatsov/emacs-tokyo-themes
+;; URL: https://github.com/bbatsov/tokyo-night-emacs
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: faces themes
@@ -34,26 +34,26 @@
 
 (require 'cl-lib)
 
-(defgroup tokyo-themes nil
+(defgroup tokyo-night nil
   "Tokyo Night theme family."
   :group 'faces
   :prefix "tokyo-"
-  :link '(url-link :tag "GitHub" "https://github.com/bbatsov/emacs-tokyo-themes")
+  :link '(url-link :tag "GitHub" "https://github.com/bbatsov/tokyo-night-emacs")
   :tag "Tokyo Night")
 
-(defcustom tokyo-themes-scale-headings t
+(defcustom tokyo-night-scale-headings t
   "Whether to scale headings in org, outline, markdown, shr, and info.
 Set to nil for uniform heading sizes.  Takes effect on theme load."
   :type 'boolean
-  :group 'tokyo-themes)
+  :group 'tokyo-night)
 
-(defcustom tokyo-themes-override-colors-alist '()
+(defcustom tokyo-night-override-colors-alist '()
   "Alist of color overrides applied to all variants.
 Each entry should be a cons cell (NAME . VALUE) where NAME is a
 color name from any variant's palette and VALUE is the
 replacement hex color string."
   :type '(alist :key-type string :value-type string)
-  :group 'tokyo-themes)
+  :group 'tokyo-night)
 
 ;;; Color Palettes
 
@@ -124,7 +124,7 @@ replacement hex color string."
   "The Tokyo Night (night) color palette.
 Darkest background variant.")
 
-(defconst tokyo-storm-colors-alist
+(defconst tokyo-night-storm-colors-alist
   '(;; Background shades
     ("tokyo-bg-darkest"    . "#1b1e2d")
     ("tokyo-bg-dark"       . "#1f2335")
@@ -191,7 +191,7 @@ Darkest background variant.")
   "The Tokyo Night (storm) color palette.
 Medium background variant, same accents as night.")
 
-(defconst tokyo-moon-colors-alist
+(defconst tokyo-night-moon-colors-alist
   '(;; Background shades
     ("tokyo-bg-darkest"    . "#191b29")
     ("tokyo-bg-dark"       . "#1e2030")
@@ -258,7 +258,7 @@ Medium background variant, same accents as night.")
   "The Tokyo Night (moon) color palette.
 Blue-tinted dark variant with unique accents.")
 
-(defconst tokyo-day-colors-alist
+(defconst tokyo-night-day-colors-alist
   '(;; Background shades
     ("tokyo-bg-darkest"    . "#c1c9df")
     ("tokyo-bg-dark"       . "#d0d5e3")
@@ -327,9 +327,9 @@ Light variant.")
 
 ;;; Face Application
 
-(defun tokyo--apply-theme (theme-name colors-alist)
+(defun tokyo-night--apply-theme (theme-name colors-alist)
   "Apply the Tokyo Night face definitions to THEME-NAME using COLORS-ALIST."
-  (let* ((merged (append tokyo-themes-override-colors-alist colors-alist))
+  (let* ((merged (append tokyo-night-override-colors-alist colors-alist))
          (class '((class color) (min-colors 88))))
     (cl-flet ((c (name) (cdr (assoc name merged))))
       (let ((tokyo-bg-darkest    (c "tokyo-bg-darkest"))
@@ -382,10 +382,10 @@ Light variant.")
             (tokyo-heading4      (c "tokyo-heading4"))
             (tokyo-heading5      (c "tokyo-heading5"))
             (tokyo-heading6      (c "tokyo-heading6"))
-            (h1 (if tokyo-themes-scale-headings 1.3 1.0))
-            (h2 (if tokyo-themes-scale-headings 1.2 1.0))
-            (h3 (if tokyo-themes-scale-headings 1.1 1.0))
-            (h-doc (if tokyo-themes-scale-headings 1.4 1.0)))
+            (h1 (if tokyo-night-scale-headings 1.3 1.0))
+            (h2 (if tokyo-night-scale-headings 1.2 1.0))
+            (h3 (if tokyo-night-scale-headings 1.1 1.0))
+            (h-doc (if tokyo-night-scale-headings 1.4 1.0)))
 
         (custom-theme-set-faces
          theme-name
@@ -1564,48 +1564,48 @@ Light variant.")
 
 ;;; Hooks
 
-(defcustom tokyo-themes-after-load-hook nil
+(defcustom tokyo-night-after-load-hook nil
   "Hook run after a Tokyo theme is loaded.
 Each function is called with the theme name (a symbol) as its
 sole argument.  Useful for applying additional customizations
 that depend on theme colors being set."
   :type 'hook
-  :group 'tokyo-themes)
+  :group 'tokyo-night)
 
 ;;; Palette API
 
-(defun tokyo-themes--palette-for (theme)
+(defun tokyo-night--palette-for (theme)
   "Return the colors alist for THEME, or nil if unknown."
   (pcase theme
     ('tokyo-night tokyo-night-colors-alist)
-    ('tokyo-storm tokyo-storm-colors-alist)
-    ('tokyo-moon  tokyo-moon-colors-alist)
-    ('tokyo-day   tokyo-day-colors-alist)))
+    ('tokyo-night-storm tokyo-night-storm-colors-alist)
+    ('tokyo-night-moon  tokyo-night-moon-colors-alist)
+    ('tokyo-night-day   tokyo-night-day-colors-alist)))
 
-(defun tokyo-themes-get-color (name &optional theme)
+(defun tokyo-night-get-color (name &optional theme)
   "Return the hex color value for NAME in the current Tokyo theme.
 NAME is a string like \"tokyo-blue\".  If THEME is given, look up
 colors in that variant's palette instead.  User overrides from
-`tokyo-themes-override-colors-alist' are respected."
-  (let* ((variant (or theme tokyo-themes--current))
-         (palette (or (tokyo-themes--palette-for variant)
+`tokyo-night-override-colors-alist' are respected."
+  (let* ((variant (or theme tokyo-night--current))
+         (palette (or (tokyo-night--palette-for variant)
                       (error "No Tokyo theme is active")))
-         (merged (append tokyo-themes-override-colors-alist palette)))
+         (merged (append tokyo-night-override-colors-alist palette)))
     (cdr (assoc name merged))))
 
 ;;;###autoload
-(defmacro tokyo-themes-with-colors (&rest body)
+(defmacro tokyo-night-with-colors (&rest body)
   "Bind all palette colors for the current Tokyo theme and evaluate BODY.
 Inside BODY, each palette color is available as a local variable,
 e.g. `tokyo-blue', `tokyo-bg', etc.
 
 Example:
-  (tokyo-themes-with-colors
+  (tokyo-night-with-colors
     (set-face-attribute \\='some-face nil :foreground tokyo-blue))"
   (declare (indent 0))
   `(let* ((--tokyo-palette
-           (append tokyo-themes-override-colors-alist
-                   (or (tokyo-themes--palette-for tokyo-themes--current)
+           (append tokyo-night-override-colors-alist
+                   (or (tokyo-night--palette-for tokyo-night--current)
                        (error "No Tokyo theme is active"))))
           ,@(mapcar (lambda (entry)
                       `(,(intern (car entry))
@@ -1615,19 +1615,19 @@ Example:
 
 ;;; Interactive Palette Viewer
 
-(defun tokyo-themes-list-colors (&optional theme)
+(defun tokyo-night-list-colors (&optional theme)
   "Display all palette colors for the current Tokyo theme.
 With prefix argument, prompt for THEME variant."
   (interactive
    (list (when current-prefix-arg
            (intern (completing-read "Variant: "
-                                    (mapcar #'symbol-name tokyo-themes--variants)
+                                    (mapcar #'symbol-name tokyo-night--variants)
                                     nil t)))))
-  (let* ((variant (or theme tokyo-themes--current
+  (let* ((variant (or theme tokyo-night--current
                       (error "No Tokyo theme is active")))
-         (palette (or (tokyo-themes--palette-for variant)
+         (palette (or (tokyo-night--palette-for variant)
                       (error "Unknown theme: %s" variant)))
-         (merged (append tokyo-themes-override-colors-alist palette))
+         (merged (append tokyo-night-override-colors-alist palette))
          (buf (get-buffer-create (format "*Tokyo Palette: %s*" variant))))
     (with-current-buffer buf
       (let ((inhibit-read-only t))
@@ -1641,14 +1641,14 @@ With prefix argument, prompt for THEME variant."
                                 'face `(:foreground ,color)))
             (insert (propertize "  sample  "
                                 'face `(:background ,color
-                                        :foreground ,(if (< (tokyo-themes--relative-luminance color) 0.5)
+                                        :foreground ,(if (< (tokyo-night--relative-luminance color) 0.5)
                                                          "#ffffff" "#000000"))))
             (insert "\n")))
         (goto-char (point-min)))
       (special-mode))
     (pop-to-buffer buf)))
 
-(defun tokyo-themes--relative-luminance (hex)
+(defun tokyo-night--relative-luminance (hex)
   "Return the relative luminance of HEX color string.
 Uses the WCAG 2.0 formula."
   (let* ((rgb (color-name-to-rgb hex))
@@ -1665,58 +1665,58 @@ Uses the WCAG 2.0 formula."
 
 ;;; User Commands
 
-(defvar tokyo-themes--current nil
+(defvar tokyo-night--current nil
   "The currently active Tokyo theme, or nil.")
 
-(defconst tokyo-themes--variants
-  '(tokyo-night tokyo-storm tokyo-moon tokyo-day)
+(defconst tokyo-night--variants
+  '(tokyo-night tokyo-night-storm tokyo-night-moon tokyo-night-day)
   "List of all Tokyo theme variants.")
 
 ;;;###autoload
-(defun tokyo-themes-reload ()
+(defun tokyo-night-reload ()
   "Reload the current Tokyo theme.
-Useful after changing `tokyo-themes-override-colors-alist' or
-`tokyo-themes-scale-headings' without having to call `load-theme'
+Useful after changing `tokyo-night-override-colors-alist' or
+`tokyo-night-scale-headings' without having to call `load-theme'
 manually."
   (interactive)
-  (if tokyo-themes--current
+  (if tokyo-night--current
       (progn
-        (load-theme tokyo-themes--current t)
-        (run-hook-with-args 'tokyo-themes-after-load-hook tokyo-themes--current))
+        (load-theme tokyo-night--current t)
+        (run-hook-with-args 'tokyo-night-after-load-hook tokyo-night--current))
     (user-error "No Tokyo theme is currently active")))
 
 ;;;###autoload
-(defun tokyo-themes-select ()
+(defun tokyo-night-select ()
   "Select and load a Tokyo theme variant interactively."
   (interactive)
-  (let* ((names (mapcar #'symbol-name tokyo-themes--variants))
+  (let* ((names (mapcar #'symbol-name tokyo-night--variants))
          (choice (intern (completing-read "Tokyo theme: " names nil t))))
-    (mapc #'disable-theme tokyo-themes--variants)
+    (mapc #'disable-theme tokyo-night--variants)
     (load-theme choice t)
-    (setq tokyo-themes--current choice)
-    (run-hook-with-args 'tokyo-themes-after-load-hook choice)))
+    (setq tokyo-night--current choice)
+    (run-hook-with-args 'tokyo-night-after-load-hook choice)))
 
-(defun tokyo-themes--set-current (theme)
+(defun tokyo-night--set-current (theme)
   "Record THEME as the active Tokyo theme.
 Called from `enable-theme-functions'."
-  (when (memq theme tokyo-themes--variants)
-    (setq tokyo-themes--current theme)))
+  (when (memq theme tokyo-night--variants)
+    (setq tokyo-night--current theme)))
 
-(defun tokyo-themes--clear-current (theme)
+(defun tokyo-night--clear-current (theme)
   "Clear the active Tokyo theme if THEME is being disabled.
 Called from `disable-theme-functions'."
-  (when (eq theme tokyo-themes--current)
-    (setq tokyo-themes--current nil)))
+  (when (eq theme tokyo-night--current)
+    (setq tokyo-night--current nil)))
 
 (when (boundp 'enable-theme-functions)
-  (add-hook 'enable-theme-functions #'tokyo-themes--set-current)
-  (add-hook 'disable-theme-functions #'tokyo-themes--clear-current))
+  (add-hook 'enable-theme-functions #'tokyo-night--set-current)
+  (add-hook 'disable-theme-functions #'tokyo-night--clear-current))
 
-(provide 'tokyo-themes)
+(provide 'tokyo-night)
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; indent-tabs-mode: nil
 ;; End:
 
-;;; tokyo-themes.el ends here
+;;; tokyo-night.el ends here

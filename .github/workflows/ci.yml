@@ -21,11 +21,11 @@ jobs:
         run: |
           emacs --batch -L . \
             --eval "(setq byte-compile-error-on-warn t)" \
-            -f batch-byte-compile tokyo-themes.el
+            -f batch-byte-compile tokyo-night.el
       - name: Load all themes
         run: |
           emacs --batch -L . \
             -l tokyo-night-theme.el \
-            -l tokyo-storm-theme.el \
-            -l tokyo-moon-theme.el \
-            -l tokyo-day-theme.el
+            -l tokyo-night-storm-theme.el \
+            -l tokyo-night-moon-theme.el \
+            -l tokyo-night-day-theme.el

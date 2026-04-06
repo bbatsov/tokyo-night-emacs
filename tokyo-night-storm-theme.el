@@ -1,4 +1,4 @@
-;;; tokyo-day-theme.el --- Tokyo Night theme (day variant) -*- lexical-binding: t; -*-
+;;; tokyo-night-storm-theme.el --- Tokyo Night theme (storm variant) -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2026 Bozhidar Batsov
 
@@ -19,16 +19,16 @@
 
 ;;; Commentary:
 
-;; The "day" variant of Tokyo Night -- a light theme.
-;; See `tokyo-themes.el' for the shared infrastructure.
+;; The "storm" variant of Tokyo Night -- medium dark background.
+;; See `tokyo-night.el' for the shared infrastructure.
 
 ;;; Code:
 
-(require 'tokyo-themes)
+(require 'tokyo-night)
 
-(deftheme tokyo-day "A clean light theme inspired by Tokyo city lights (day variant).")
+(deftheme tokyo-night-storm "A clean dark theme inspired by Tokyo city lights (storm variant).")
 
-(tokyo--apply-theme 'tokyo-day tokyo-day-colors-alist)
+(tokyo-night--apply-theme 'tokyo-night-storm tokyo-night-storm-colors-alist)
 
 ;;;###autoload
 (and load-file-name
@@ -37,13 +37,13 @@
                   (file-name-as-directory
                    (file-name-directory load-file-name))))
 
-(provide-theme 'tokyo-day)
+(provide-theme 'tokyo-night-storm)
 
-(provide 'tokyo-day-theme)
+(provide 'tokyo-night-storm-theme)
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; indent-tabs-mode: nil
 ;; End:
 
-;;; tokyo-day-theme.el ends here
+;;; tokyo-night-storm-theme.el ends here

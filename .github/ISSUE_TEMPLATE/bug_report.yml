@@ -15,9 +15,9 @@ body:
       description: Which variant are you using?
       options:
         - tokyo-night
-        - tokyo-storm
-        - tokyo-moon
-        - tokyo-day
+        - tokyo-night-storm
+        - tokyo-night-moon
+        - tokyo-night-day
         - All variants
     validations:
       required: true
