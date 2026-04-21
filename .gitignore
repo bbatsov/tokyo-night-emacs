@@ -3,3 +3,4 @@
 *-autoloads.el
 *-pkg.el
 dist/
+.eldev/
