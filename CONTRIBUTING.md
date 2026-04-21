@@ -24,6 +24,8 @@ request. Please, try to follow these guidelines when you do so.
 * Update the [changelog][4].
 * Use the same coding conventions as the rest of the project.
 * Verify your Emacs Lisp code with `checkdoc` (`C-c ? d`).
+* Run the test suite with `eldev buttercup` and, where practical, add a
+  test for the behavior you're changing.
 * Add a before/after screenshot illustrating your changes visually.
 * [Squash related commits together][5].
 * Open a [pull request][6] that relates to *only* one subject with a clear title
