@@ -1,6 +1,7 @@
 # Tokyo Themes for Emacs
 
 [![CI](https://github.com/bbatsov/tokyo-night-emacs/actions/workflows/ci.yml/badge.svg)](https://github.com/bbatsov/tokyo-night-emacs/actions/workflows/ci.yml)
+[![MELPA](https://melpa.org/packages/tokyo-night-badge.svg)](https://melpa.org/#/tokyo-night)
 
 A faithful Emacs port of [folke's Tokyo Night](https://github.com/folke/tokyonight.nvim) color theme.
 
@@ -16,6 +17,31 @@ All four variants are included:
 | `tokyo-night-day` | `#e1e2e7` | Light variant |
 
 ## Installation
+
+### MELPA
+
+Tokyo Night is available on [MELPA](https://melpa.org/#/tokyo-night). Assuming
+you've [configured MELPA](https://melpa.org/#/getting-started) as a package
+source:
+
+```
+M-x package-install RET tokyo-night RET
+```
+
+Then load any variant:
+
+```emacs-lisp
+(load-theme 'tokyo-night t)
+```
+
+Or with `use-package`:
+
+```emacs-lisp
+(use-package tokyo-night
+  :ensure t
+  :config
+  (load-theme 'tokyo-night t))
+```
 
 ### package-vc (Emacs 29+)
 
