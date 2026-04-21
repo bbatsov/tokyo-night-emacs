@@ -831,9 +831,9 @@ Light variant.")
          `(org-agenda-current-time ((,class (:foreground ,tokyo-cyan))))
 
 ;;;;; outline
-         `(outline-1 ((,class (:foreground ,tokyo-heading1 :weight bold))))
-         `(outline-2 ((,class (:foreground ,tokyo-heading2 :weight bold))))
-         `(outline-3 ((,class (:foreground ,tokyo-heading3 :weight bold))))
+         `(outline-1 ((,class (:foreground ,tokyo-heading1 :weight bold :height ,h1))))
+         `(outline-2 ((,class (:foreground ,tokyo-heading2 :weight bold :height ,h2))))
+         `(outline-3 ((,class (:foreground ,tokyo-heading3 :weight bold :height ,h3))))
          `(outline-4 ((,class (:foreground ,tokyo-heading4 :weight bold))))
          `(outline-5 ((,class (:foreground ,tokyo-heading5 :weight bold))))
          `(outline-6 ((,class (:foreground ,tokyo-heading6 :weight bold))))

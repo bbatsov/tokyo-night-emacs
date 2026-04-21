@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Bug fixes
+
+* Fix `tokyo-night-scale-headings` not affecting org-mode and other
+  outline-based headings -- `outline-1..3` were missing `:height`, so
+  the scale factors never flowed through to org (which inherits them).
+
 ## 1.0.0 (2026-04-21)
 
 ### New features
