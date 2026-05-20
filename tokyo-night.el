@@ -1,4 +1,4 @@
-;;; tokyo-night.el --- Shared infrastructure for Tokyo Night themes -*- lexical-binding: t; -*-
+;;; tokyo-night.el --- Tokyo Night color themes -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2026 Bozhidar Batsov
 
