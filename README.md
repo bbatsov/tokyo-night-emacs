@@ -5,8 +5,6 @@
 
 A faithful Emacs port of [folke's Tokyo Night](https://github.com/folke/tokyonight.nvim) color theme.
 
-![Tokyo Storm](screenshots/tokyo-storm.png)
-
 All four variants are included:
 
 | Theme | Background | Description |
@@ -15,6 +13,17 @@ All four variants are included:
 | `tokyo-night-storm` | `#24283b` | Medium dark |
 | `tokyo-night-moon` | `#222436` | Blue-tinted dark, unique accents |
 | `tokyo-night-day` | `#e1e2e7` | Light variant |
+
+<table>
+  <tr>
+    <td align="center"><code>tokyo-night</code><br><img src="screenshots/tokyo-night.png" alt="tokyo-night" width="420"></td>
+    <td align="center"><code>tokyo-night-storm</code><br><img src="screenshots/tokyo-night-storm.png" alt="tokyo-night-storm" width="420"></td>
+  </tr>
+  <tr>
+    <td align="center"><code>tokyo-night-moon</code><br><img src="screenshots/tokyo-night-moon.png" alt="tokyo-night-moon" width="420"></td>
+    <td align="center"><code>tokyo-night-day</code><br><img src="screenshots/tokyo-night-day.png" alt="tokyo-night-day" width="420"></td>
+  </tr>
+</table>
 
 ## Installation
 
