@@ -1908,6 +1908,9 @@ Light variant.")
          `(vundo-last-saved ((,class (:foreground ,tokyo-green :weight bold))))
          `(vundo-diff-highlight ((,class (:foreground ,tokyo-orange :weight bold))))
 
+;;;;; volatile-highlights
+         `(vhl/default-face ((,class (:background ,tokyo-blue-dark))))
+
 ;;;;; wgrep
          `(wgrep-face ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg))))
          `(wgrep-delete-face ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg))))
