@@ -1899,6 +1899,15 @@ Light variant.")
          `(undo-tree-visualizer-register-face ((,class (:foreground ,tokyo-yellow))))
          `(undo-tree-visualizer-unmodified-face ((,class (:foreground ,tokyo-teal))))
 
+;;;;; vundo
+         `(vundo-node ((,class (:foreground ,tokyo-dark5))))
+         `(vundo-stem ((,class (:foreground ,tokyo-fg-gutter))))
+         `(vundo-branch-stem ((,class (:foreground ,tokyo-dark3))))
+         `(vundo-highlight ((,class (:foreground ,tokyo-blue :weight bold))))
+         `(vundo-saved ((,class (:foreground ,tokyo-green))))
+         `(vundo-last-saved ((,class (:foreground ,tokyo-green :weight bold))))
+         `(vundo-diff-highlight ((,class (:foreground ,tokyo-orange :weight bold))))
+
 ;;;;; wgrep
          `(wgrep-face ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg))))
          `(wgrep-delete-face ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg))))
