@@ -926,6 +926,11 @@ Light variant.")
          `(holiday ((,class (:foreground ,tokyo-orange))))
          `(diary ((,class (:foreground ,tokyo-yellow))))
 
+;;;;; completion-preview
+         `(completion-preview ((,class (:foreground ,tokyo-comment))))
+         `(completion-preview-common ((,class (:foreground ,tokyo-dark5))))
+         `(completion-preview-exact ((,class (:foreground ,tokyo-dark5 :underline t))))
+
 ;;;;; eglot
          `(eglot-highlight-symbol-face ((,class (:background ,tokyo-bg-highlight :weight bold))))
          `(eglot-diagnostic-tag-unnecessary-face ((,class (:foreground ,tokyo-comment :underline (:style wave :color ,tokyo-dark5)))))
