@@ -1111,6 +1111,14 @@ Light variant.")
          `(easy-kill-selection ((,class (:background ,tokyo-selection :extend t))))
          `(easy-kill-origin ((,class (:foreground ,tokyo-bg :background ,tokyo-red))))
 
+;;;;; erlang
+         `(erlang-font-lock-exported-function-name-face ((,class (:foreground ,tokyo-blue :weight bold))))
+         `(erlang-edoc-heading ((,class (:foreground ,tokyo-magenta :weight bold))))
+         `(erlang-edoc-tag ((,class (:foreground ,tokyo-dark5))))
+         `(erlang-edoc-macro ((,class (:foreground ,tokyo-teal))))
+         `(erlang-edoc-verbatim ((,class (:foreground ,tokyo-teal))))
+         `(erlang-edoc-todo ((,class (:foreground ,tokyo-magenta-hot :weight bold))))
+
 ;;;;; flycheck
          `(flycheck-error ((,class (:underline (:style wave :color ,tokyo-red-dark)))))
          `(flycheck-warning ((,class (:underline (:style wave :color ,tokyo-yellow)))))
