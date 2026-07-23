@@ -191,7 +191,9 @@ frame-side face recomputation (which is unreliable in batch)."
     (volatile-highlights vhl/default-face)
     (easy-kill easy-kill-selection easy-kill-origin)
     (clojure-mode clojure-keyword-face clojure-character-face
-                  clojure-discard-face))
+                  clojure-discard-face)
+    (corfu corfu-popupinfo)
+    (copilot copilot-overlay-face))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"

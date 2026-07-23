@@ -1083,6 +1083,10 @@ Light variant.")
          `(corfu-border ((,class (:background ,tokyo-fg-gutter))))
          `(corfu-annotations ((,class (:foreground ,tokyo-comment))))
          `(corfu-deprecated ((,class (:foreground ,tokyo-comment :strike-through t))))
+         `(corfu-popupinfo ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark))))
+
+;;;;; copilot
+         `(copilot-overlay-face ((,class (:foreground ,tokyo-comment :slant italic))))
 
 ;;;;; embark
          `(embark-keybinding ((,class (:foreground ,tokyo-blue :weight bold))))
