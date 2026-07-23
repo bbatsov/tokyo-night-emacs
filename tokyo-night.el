@@ -1150,6 +1150,25 @@ Light variant.")
          `(git-timemachine-minibuffer-author-face ((,class (:foreground ,tokyo-orange))))
          `(git-timemachine-minibuffer-detail-face ((,class (:foreground ,tokyo-cyan))))
 
+;;;;; haskell-mode
+         `(haskell-keyword-face ((,class (:foreground ,tokyo-magenta :slant italic))))
+         `(haskell-type-face ((,class (:foreground ,tokyo-cyan))))
+         `(haskell-constructor-face ((,class (:foreground ,tokyo-cyan))))
+         `(haskell-definition-face ((,class (:foreground ,tokyo-blue))))
+         `(haskell-operator-face ((,class (:foreground ,tokyo-cyan-pale))))
+         `(haskell-pragma-face ((,class (:foreground ,tokyo-teal))))
+         `(haskell-quasi-quote-face ((,class (:foreground ,tokyo-green))))
+         `(haskell-literate-comment-face ((,class (:foreground ,tokyo-comment :slant italic))))
+         `(haskell-hole-face ((,class (:foreground ,tokyo-yellow :weight bold))))
+         `(haskell-error-face ((,class (:underline (:style wave :color ,tokyo-red-dark)))))
+         `(haskell-warning-face ((,class (:underline (:style wave :color ,tokyo-yellow)))))
+         `(haskell-interactive-face-prompt ((,class (:foreground ,tokyo-cyan))))
+         `(haskell-interactive-face-prompt-cont ((,class (:foreground ,tokyo-teal))))
+         `(haskell-interactive-face-compile-error ((,class (:foreground ,tokyo-red-dark :weight bold))))
+         `(haskell-interactive-face-compile-warning ((,class (:foreground ,tokyo-yellow :weight bold))))
+         `(haskell-interactive-face-result ((,class (:foreground ,tokyo-teal))))
+         `(haskell-interactive-face-garbage ((,class (:foreground ,tokyo-comment))))
+
 ;;;;; helpful
          `(helpful-heading ((,class (:foreground ,tokyo-blue :weight bold :height 1.2))))
 
