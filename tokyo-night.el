@@ -931,6 +931,12 @@ Light variant.")
          `(completion-preview-common ((,class (:foreground ,tokyo-dark5))))
          `(completion-preview-exact ((,class (:foreground ,tokyo-dark5 :underline t))))
 
+;;;;; dictionary
+         `(dictionary-word-entry-face ((,class (:foreground ,tokyo-blue :weight bold))))
+         `(dictionary-word-definition-face ((,class (:foreground ,tokyo-fg))))
+         `(dictionary-reference-face ((,class (:foreground ,tokyo-teal :underline t))))
+         `(dictionary-button-face ((,class (:foreground ,tokyo-teal :underline t :weight bold))))
+
 ;;;;; eglot
          `(eglot-highlight-symbol-face ((,class (:background ,tokyo-bg-highlight :weight bold))))
          `(eglot-diagnostic-tag-unnecessary-face ((,class (:foreground ,tokyo-comment :underline (:style wave :color ,tokyo-dark5)))))
