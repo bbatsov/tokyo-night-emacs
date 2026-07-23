@@ -196,7 +196,14 @@ frame-side face recomputation (which is unreliable in batch)."
     (copilot copilot-overlay-face)
     (git-timemachine git-timemachine-commit
                      git-timemachine-minibuffer-author-face
-                     git-timemachine-minibuffer-detail-face))
+                     git-timemachine-minibuffer-detail-face)
+    (haskell-mode haskell-keyword-face haskell-type-face
+                  haskell-constructor-face haskell-definition-face
+                  haskell-operator-face haskell-pragma-face
+                  haskell-hole-face haskell-error-face haskell-warning-face
+                  haskell-interactive-face-prompt
+                  haskell-interactive-face-compile-error
+                  haskell-interactive-face-result))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
