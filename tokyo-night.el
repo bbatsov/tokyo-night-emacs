@@ -1160,6 +1160,13 @@ Light variant.")
          `(ivy-prompt-match ((,class (:inherit ivy-current-match))))
          `(ivy-org ((,class (:foreground ,tokyo-green))))
 
+;;;;; jinx
+         `(jinx-misspelled ((,class (:underline (:style wave :color ,tokyo-red-dark)))))
+         `(jinx-highlight ((,class (:foreground ,tokyo-bg :background ,tokyo-magenta-hot :weight bold))))
+         `(jinx-save ((,class (:foreground ,tokyo-orange :weight bold))))
+         `(jinx-key ((,class (:foreground ,tokyo-blue))))
+         `(jinx-annotation ((,class (:foreground ,tokyo-comment))))
+
 ;;;;; magit
          `(magit-section-heading ((,class (:foreground ,tokyo-blue :weight bold))))
          `(magit-section-heading-selection ((,class (:foreground ,tokyo-orange :weight bold))))
