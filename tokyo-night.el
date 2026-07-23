@@ -1513,6 +1513,11 @@ Light variant.")
          `(aw-mode-line-face ((,class (:foreground ,tokyo-blue :weight bold))))
          `(aw-key-face ((,class (:foreground ,tokyo-magenta-hot :weight bold))))
 
+;;;;; clojure-mode
+         `(clojure-keyword-face ((,class (:foreground ,tokyo-teal))))
+         `(clojure-character-face ((,class (:foreground ,tokyo-green))))
+         `(clojure-discard-face ((,class (:foreground ,tokyo-comment :slant italic))))
+
 ;;;;; cider
          `(cider-result-overlay-face ((,class (:foreground ,tokyo-teal :background ,tokyo-bg-dark :box (:line-width -1 :color ,tokyo-teal-dark)))))
          `(cider-error-overlay-face ((,class (:foreground ,tokyo-red :background ,tokyo-bg-dark :box (:line-width -1 :color ,tokyo-red-dark)))))
