@@ -1097,6 +1097,10 @@ Light variant.")
          `(embark-collect-annotation ((,class (:foreground ,tokyo-comment))))
          `(embark-selected ((,class (:background ,tokyo-bg-highlight :weight bold))))
 
+;;;;; easy-kill
+         `(easy-kill-selection ((,class (:background ,tokyo-selection :extend t))))
+         `(easy-kill-origin ((,class (:foreground ,tokyo-bg :background ,tokyo-red))))
+
 ;;;;; flycheck
          `(flycheck-error ((,class (:underline (:style wave :color ,tokyo-red-dark)))))
          `(flycheck-warning ((,class (:underline (:style wave :color ,tokyo-yellow)))))
