@@ -1204,6 +1204,10 @@ Light variant.")
          `(jinx-key ((,class (:foreground ,tokyo-blue))))
          `(jinx-annotation ((,class (:foreground ,tokyo-comment))))
 
+;;;;; keycast
+         `(keycast-key ((,class (:foreground ,tokyo-bg :background ,tokyo-blue :weight bold))))
+         `(keycast-command ((,class (:weight bold))))
+
 ;;;;; magit
          `(magit-section-heading ((,class (:foreground ,tokyo-blue :weight bold))))
          `(magit-section-heading-selection ((,class (:foreground ,tokyo-orange :weight bold))))
