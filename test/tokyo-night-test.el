@@ -84,7 +84,13 @@ frame-side face recomputation (which is unreliable in batch)."
     (it "scales shr-h1..3"
       (expect (tokyo-night-test--face-attr 'shr-h1 'tokyo-night :height) :to-equal 1.3)
       (expect (tokyo-night-test--face-attr 'shr-h2 'tokyo-night :height) :to-equal 1.2)
-      (expect (tokyo-night-test--face-attr 'shr-h3 'tokyo-night :height) :to-equal 1.1)))
+      (expect (tokyo-night-test--face-attr 'shr-h3 'tokyo-night :height) :to-equal 1.1))
+
+    (it "scales asciidoc titles"
+      (expect (tokyo-night-test--face-attr 'asciidoc-document-title-face 'tokyo-night :height) :to-equal 1.4)
+      (expect (tokyo-night-test--face-attr 'asciidoc-title-1-face 'tokyo-night :height) :to-equal 1.3)
+      (expect (tokyo-night-test--face-attr 'asciidoc-title-2-face 'tokyo-night :height) :to-equal 1.2)
+      (expect (tokyo-night-test--face-attr 'asciidoc-title-3-face 'tokyo-night :height) :to-equal 1.1)))
 
   (describe "when disabled"
     (before-each
@@ -161,7 +167,18 @@ frame-side face recomputation (which is unreliable in batch)."
           anzu-replace-highlight anzu-replace-to)
     (jinx jinx-misspelled jinx-highlight jinx-save jinx-key jinx-annotation)
     (completion-preview completion-preview completion-preview-common
-                        completion-preview-exact))
+                        completion-preview-exact)
+    (asciidoc-mode asciidoc-document-title-face asciidoc-title-1-face
+                   asciidoc-title-5-face asciidoc-markup-face
+                   asciidoc-code-face asciidoc-link-face asciidoc-url-face
+                   asciidoc-metadata-key-face asciidoc-highlight-face
+                   asciidoc-admonition-note-label-face
+                   asciidoc-admonition-note-face
+                   asciidoc-admonition-tip-label-face
+                   asciidoc-admonition-important-label-face
+                   asciidoc-admonition-caution-label-face
+                   asciidoc-admonition-warning-label-face
+                   asciidoc-admonition-warning-face))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
