@@ -187,7 +187,8 @@ frame-side face recomputation (which is unreliable in batch)."
            cider-fringe-bad-face cider-reader-conditional-face
            nrepl-message-1-face nrepl-message-8-face)
     (vundo vundo-node vundo-stem vundo-branch-stem vundo-highlight
-           vundo-saved vundo-last-saved vundo-diff-highlight))
+           vundo-saved vundo-last-saved vundo-diff-highlight)
+    (volatile-highlights vhl/default-face))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
