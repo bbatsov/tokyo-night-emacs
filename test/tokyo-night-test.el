@@ -204,7 +204,9 @@ frame-side face recomputation (which is unreliable in batch)."
                   haskell-interactive-face-prompt
                   haskell-interactive-face-compile-error
                   haskell-interactive-face-result)
-    (keycast keycast-key keycast-command))
+    (keycast keycast-key keycast-command)
+    (dictionary dictionary-word-entry-face dictionary-word-definition-face
+                dictionary-reference-face dictionary-button-face))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
