@@ -1013,6 +1013,15 @@ Light variant.")
          `(evil-ex-substitute-matches ((,class (:foreground ,tokyo-fg :background ,tokyo-blue-dark))))
          `(evil-ex-substitute-replacement ((,class (:foreground ,tokyo-orange :underline t :weight bold))))
 
+;;;;; anzu
+         `(anzu-mode-line ((,class (:foreground ,tokyo-cyan :weight bold))))
+         `(anzu-mode-line-no-match ((,class (:foreground ,tokyo-red :weight bold))))
+         `(anzu-match-1 ((,class (:foreground ,tokyo-bg :background ,tokyo-blue))))
+         `(anzu-match-2 ((,class (:foreground ,tokyo-bg :background ,tokyo-teal))))
+         `(anzu-match-3 ((,class (:foreground ,tokyo-bg :background ,tokyo-orange))))
+         `(anzu-replace-highlight ((,class (:foreground ,tokyo-fg :background ,tokyo-blue-dark))))
+         `(anzu-replace-to ((,class (:foreground ,tokyo-orange :underline t :weight bold))))
+
 ;;;;; avy
          `(avy-lead-face ((,class (:foreground ,tokyo-bg :background ,tokyo-magenta-hot :weight bold))))
          `(avy-lead-face-0 ((,class (:foreground ,tokyo-bg :background ,tokyo-blue :weight bold))))

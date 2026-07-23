@@ -151,4 +151,28 @@ frame-side face recomputation (which is unreliable in batch)."
       (expect (load-theme variant t) :to-be-truthy)
       (expect (custom-theme-enabled-p variant) :to-be-truthy))))
 
+;;; Package face coverage
+;;
+;; One entry per package: representative faces that the theme must set.
+;; Guards against sections silently disappearing during refactors.
+
+(defconst tokyo-night-test--package-faces
+  '((anzu anzu-mode-line anzu-match-1 anzu-match-2 anzu-match-3
+          anzu-replace-highlight anzu-replace-to))
+  "Alist of (PACKAGE . FACES) the theme is expected to cover.")
+
+(describe "package face coverage"
+  (before-all
+    (tokyo-night-test--reload 'tokyo-night))
+  (after-all
+    (disable-theme 'tokyo-night))
+
+  (dolist (entry tokyo-night-test--package-faces)
+    (let ((package (car entry))
+          (faces (cdr entry)))
+      (it (format "themes %s" package)
+        (dolist (face faces)
+          (expect (assq 'tokyo-night (get face 'theme-face))
+                  :to-be-truthy))))))
+
 ;;; tokyo-night-test.el ends here
