@@ -1145,6 +1145,11 @@ Light variant.")
          `(git-rebase-comment-hash ((,class (:foreground ,tokyo-dark5))))
          `(git-rebase-comment-heading ((,class (:foreground ,tokyo-fg :weight bold))))
 
+;;;;; git-timemachine
+         `(git-timemachine-commit ((,class (:foreground ,tokyo-orange :weight bold))))
+         `(git-timemachine-minibuffer-author-face ((,class (:foreground ,tokyo-orange))))
+         `(git-timemachine-minibuffer-detail-face ((,class (:foreground ,tokyo-cyan))))
+
 ;;;;; helpful
          `(helpful-heading ((,class (:foreground ,tokyo-blue :weight bold :height 1.2))))
 
