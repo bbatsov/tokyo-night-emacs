@@ -159,7 +159,9 @@ frame-side face recomputation (which is unreliable in batch)."
 (defconst tokyo-night-test--package-faces
   '((anzu anzu-mode-line anzu-match-1 anzu-match-2 anzu-match-3
           anzu-replace-highlight anzu-replace-to)
-    (jinx jinx-misspelled jinx-highlight jinx-save jinx-key jinx-annotation))
+    (jinx jinx-misspelled jinx-highlight jinx-save jinx-key jinx-annotation)
+    (completion-preview completion-preview completion-preview-common
+                        completion-preview-exact))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
