@@ -210,7 +210,8 @@ frame-side face recomputation (which is unreliable in batch)."
     (mistty mistty-fringe-face)
     (erlang erlang-font-lock-exported-function-name-face
             erlang-edoc-heading erlang-edoc-tag erlang-edoc-macro
-            erlang-edoc-verbatim erlang-edoc-todo))
+            erlang-edoc-verbatim erlang-edoc-todo)
+    (inf-ruby inf-ruby-result-overlay-face))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
@@ -230,6 +231,12 @@ frame-side face recomputation (which is unreliable in batch)."
   (it "gives jinx-misspelled the same underline as flyspell-incorrect"
     (expect (tokyo-night-test--face-attr 'jinx-misspelled 'tokyo-night :underline)
             :to-equal
-            (tokyo-night-test--face-attr 'flyspell-incorrect 'tokyo-night :underline))))
+            (tokyo-night-test--face-attr 'flyspell-incorrect 'tokyo-night :underline)))
+
+  (it "styles inf-ruby's result overlay like cider's"
+    (dolist (attr '(:foreground :background :box))
+      (expect (tokyo-night-test--face-attr 'inf-ruby-result-overlay-face 'tokyo-night attr)
+              :to-equal
+              (tokyo-night-test--face-attr 'cider-result-overlay-face 'tokyo-night attr)))))
 
 ;;; tokyo-night-test.el ends here
