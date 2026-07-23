@@ -1186,6 +1186,9 @@ Light variant.")
 ;;;;; helpful
          `(helpful-heading ((,class (:foreground ,tokyo-blue :weight bold :height 1.2))))
 
+;;;;; inf-ruby
+         `(inf-ruby-result-overlay-face ((,class (:foreground ,tokyo-teal :background ,tokyo-bg-dark :box (:line-width -1 :color ,tokyo-teal-dark)))))
+
 ;;;;; ivy
          `(ivy-current-match ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight :weight bold :extend t))))
          `(ivy-minibuffer-match-highlight ((,class (:foreground ,tokyo-orange))))
