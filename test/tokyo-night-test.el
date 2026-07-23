@@ -158,7 +158,8 @@ frame-side face recomputation (which is unreliable in batch)."
 
 (defconst tokyo-night-test--package-faces
   '((anzu anzu-mode-line anzu-match-1 anzu-match-2 anzu-match-3
-          anzu-replace-highlight anzu-replace-to))
+          anzu-replace-highlight anzu-replace-to)
+    (jinx jinx-misspelled jinx-highlight jinx-save jinx-key jinx-annotation))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
@@ -173,6 +174,11 @@ frame-side face recomputation (which is unreliable in batch)."
       (it (format "themes %s" package)
         (dolist (face faces)
           (expect (assq 'tokyo-night (get face 'theme-face))
-                  :to-be-truthy))))))
+                  :to-be-truthy)))))
+
+  (it "gives jinx-misspelled the same underline as flyspell-incorrect"
+    (expect (tokyo-night-test--face-attr 'jinx-misspelled 'tokyo-night :underline)
+            :to-equal
+            (tokyo-night-test--face-attr 'flyspell-incorrect 'tokyo-night :underline))))
 
 ;;; tokyo-night-test.el ends here
