@@ -1470,6 +1470,9 @@ Light variant.")
          `(markdown-html-attr-value-face ((,class (:foreground ,tokyo-green))))
          `(markdown-html-entity-face ((,class (:foreground ,tokyo-orange))))
 
+;;;;; mistty
+         `(mistty-fringe-face ((,class (:foreground ,tokyo-blue-dark))))
+
 ;;;;; orderless
          `(orderless-match-face-0 ((,class (:foreground ,tokyo-blue :weight bold))))
          `(orderless-match-face-1 ((,class (:foreground ,tokyo-magenta :weight bold))))
