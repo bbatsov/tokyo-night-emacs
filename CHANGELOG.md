@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### New features
+
+* [#4](https://github.com/bbatsov/tokyo-night-emacs/pull/4): Face coverage
+  expanded to anzu, jinx, completion-preview, asciidoc-mode, vundo,
+  volatile-highlights, easy-kill, clojure-mode, copilot, git-timemachine,
+  haskell-mode, keycast, dictionary, mistty, erlang and inf-ruby.
+* [#4](https://github.com/bbatsov/tokyo-night-emacs/pull/4): Deeper cider
+  coverage: REPL, stacktrace and inline error faces, plus the nREPL message
+  log (and corfu gained its doc popup face).
+
 ### Bug fixes
 
 * Fix `tokyo-night-scale-headings` not affecting org-mode and other

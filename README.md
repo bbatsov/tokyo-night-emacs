@@ -218,11 +218,13 @@ for a deeper look at both approaches.
 
 Beyond all built-in Emacs faces, the theme covers these packages:
 
-- **Completion:** vertico, corfu, marginalia, orderless, consult, embark, company, ivy, swiper
-- **Development:** magit, forge, transient, git-commit, git-rebase, eglot, lsp-mode, lsp-ui, flycheck, cider
-- **Editing:** evil, smartparens, rainbow-delimiters, avy, ace-window, hydra, which-key
+- **Completion:** vertico, corfu, marginalia, orderless, consult, embark, company, ivy, swiper, copilot
+- **Development:** magit, forge, transient, git-commit, git-rebase, git-timemachine, eglot, lsp-mode, lsp-ui, flycheck, cider, inf-ruby
+- **Editing:** evil, smartparens, rainbow-delimiters, avy, ace-window, hydra, which-key, anzu, easy-kill, jinx, vundo, volatile-highlights
 - **Email:** mu4e, notmuch
-- **UI:** doom-modeline, treemacs, helpful, markdown-mode, web-mode, elfeed
+- **Languages:** clojure-mode, haskell-mode, erlang
+- **Markup:** markdown-mode, adoc-mode, asciidoc-mode, web-mode
+- **UI:** doom-modeline, treemacs, helpful, elfeed, keycast, mistty
 
 Missing a package? [Open an issue](https://github.com/bbatsov/tokyo-night-emacs/issues/new?template=feature_request.yml)
 or submit a PR.
