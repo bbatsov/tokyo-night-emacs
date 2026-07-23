@@ -203,7 +203,8 @@ frame-side face recomputation (which is unreliable in batch)."
                   haskell-hole-face haskell-error-face haskell-warning-face
                   haskell-interactive-face-prompt
                   haskell-interactive-face-compile-error
-                  haskell-interactive-face-result))
+                  haskell-interactive-face-result)
+    (keycast keycast-key keycast-command))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
