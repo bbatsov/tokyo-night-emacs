@@ -193,7 +193,10 @@ frame-side face recomputation (which is unreliable in batch)."
     (clojure-mode clojure-keyword-face clojure-character-face
                   clojure-discard-face)
     (corfu corfu-popupinfo)
-    (copilot copilot-overlay-face))
+    (copilot copilot-overlay-face)
+    (git-timemachine git-timemachine-commit
+                     git-timemachine-minibuffer-author-face
+                     git-timemachine-minibuffer-detail-face))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
