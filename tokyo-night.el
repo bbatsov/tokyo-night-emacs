@@ -1041,6 +1041,15 @@ Light variant.")
          `(avy-background-face ((,class (:foreground ,tokyo-comment))))
          `(avy-goto-char-timer-face ((,class (:foreground ,tokyo-bg :background ,tokyo-magenta-hot))))
 
+;;;;; breadcrumb
+         `(breadcrumb-face ((,class (:foreground ,tokyo-dark5))))
+         `(breadcrumb-imenu-leaf-face ((,class (:foreground ,tokyo-blue :weight bold))))
+         `(breadcrumb-imenu-crumbs-face ((,class (:foreground ,tokyo-dark5))))
+         `(breadcrumb-imenu-base-face ((,class (:foreground ,tokyo-dark5 :weight bold))))
+         `(breadcrumb-project-leaf-face ((,class (:foreground ,tokyo-fg :weight bold))))
+         `(breadcrumb-project-crumbs-face ((,class (:foreground ,tokyo-dark5))))
+         `(breadcrumb-project-base-face ((,class (:foreground ,tokyo-dark5 :weight bold))))
+
 ;;;;; company
          `(company-tooltip ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark))))
          `(company-tooltip-selection ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight))))

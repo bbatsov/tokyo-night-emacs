@@ -4,6 +4,7 @@
 
 ### New features
 
+* Add face support for breadcrumb.
 * [#4](https://github.com/bbatsov/tokyo-night-emacs/pull/4): Face coverage
   expanded to anzu, jinx, completion-preview, asciidoc-mode, vundo,
   volatile-highlights, easy-kill, clojure-mode, copilot, git-timemachine,
