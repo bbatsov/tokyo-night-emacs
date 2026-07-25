@@ -211,7 +211,11 @@ frame-side face recomputation (which is unreliable in batch)."
     (erlang erlang-font-lock-exported-function-name-face
             erlang-edoc-heading erlang-edoc-tag erlang-edoc-macro
             erlang-edoc-verbatim erlang-edoc-todo)
-    (inf-ruby inf-ruby-result-overlay-face))
+    (inf-ruby inf-ruby-result-overlay-face)
+    (breadcrumb breadcrumb-face breadcrumb-imenu-leaf-face
+                breadcrumb-imenu-crumbs-face breadcrumb-imenu-base-face
+                breadcrumb-project-leaf-face breadcrumb-project-crumbs-face
+                breadcrumb-project-base-face))
   "Alist of (PACKAGE . FACES) the theme is expected to cover.")
 
 (describe "package face coverage"
