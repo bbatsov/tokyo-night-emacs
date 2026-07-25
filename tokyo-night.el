@@ -1173,6 +1173,13 @@ Light variant.")
          `(git-timemachine-minibuffer-author-face ((,class (:foreground ,tokyo-orange))))
          `(git-timemachine-minibuffer-detail-face ((,class (:foreground ,tokyo-cyan))))
 
+;;;;; gptel
+         `(gptel-context-highlight-face ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(gptel-context-deletion-face ((,class (:background ,tokyo-diff-del-bg :extend t))))
+         `(gptel-rewrite-highlight-face ((,class (:background ,tokyo-diff-chg-bg :extend t))))
+         `(gptel-response-highlight ((,class (:background ,tokyo-bg-dark :extend t))))
+         `(gptel-response-fringe-highlight ((,class (:foreground ,tokyo-blue))))
+
 ;;;;; haskell-mode
          `(haskell-keyword-face ((,class (:foreground ,tokyo-magenta :slant italic))))
          `(haskell-type-face ((,class (:foreground ,tokyo-cyan))))
