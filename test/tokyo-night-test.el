@@ -149,6 +149,24 @@ frame-side face recomputation (which is unreliable in batch)."
     ;; comments stay italic
     (expect (tokyo-night-test--face-attr 'font-lock-comment-face 'tokyo-night :slant) :to-equal 'italic)))
 
+;;; Flat mode line
+
+(describe "flat mode line"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (it "boxes the mode line by default"
+    (tokyo-night-test--reload 'tokyo-night)
+    (expect (tokyo-night-test--face-attr 'mode-line 'tokyo-night :box) :not :to-be nil))
+
+  (it "drops the box when flat"
+    (let ((tokyo-night-flat-mode-line t))
+      (tokyo-night-test--reload 'tokyo-night))
+    (expect (tokyo-night-test--face-attr 'mode-line 'tokyo-night :box) :to-be nil)
+    (expect (tokyo-night-test--face-attr 'mode-line-inactive 'tokyo-night :box) :to-be nil)))
+
 ;;; Palette integrity
 
 (describe "color palettes"
