@@ -149,6 +149,26 @@ frame-side face recomputation (which is unreliable in batch)."
     ;; comments stay italic
     (expect (tokyo-night-test--face-attr 'font-lock-comment-face 'tokyo-night :slant) :to-equal 'italic)))
 
+;;; Variable-pitch headings
+
+(describe "variable-pitch headings"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (it "leaves headings fixed-pitch by default"
+    (tokyo-night-test--reload 'tokyo-night)
+    (expect (tokyo-night-test--face-attr 'outline-1 'tokyo-night :inherit) :to-equal 'default)
+    (expect (tokyo-night-test--face-attr 'markdown-header-face-1 'tokyo-night :inherit) :to-equal 'default))
+
+  (it "switches headings to variable-pitch when enabled"
+    (let ((tokyo-night-use-variable-pitch t))
+      (tokyo-night-test--reload 'tokyo-night))
+    (dolist (face '(outline-1 org-document-title markdown-header-face-1
+                    asciidoc-title-1-face shr-h1 info-title-1))
+      (expect (tokyo-night-test--face-attr face 'tokyo-night :inherit) :to-equal 'variable-pitch))))
+
 ;;; Flat mode line
 
 (describe "flat mode line"
