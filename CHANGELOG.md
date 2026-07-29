@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### New features
+
+* [#6](https://github.com/bbatsov/tokyo-night-emacs/pull/6): Add appearance options: customizable heading scale factors (`tokyo-night-height-1` through `-height-3` and `-height-doc-title`), `tokyo-night-use-variable-pitch`, `tokyo-night-italic-comments`, `tokyo-night-italic-keywords` and `tokyo-night-flat-mode-line`.
+
 ## 1.1.0 (2026-07-26)
 
 ### New features
