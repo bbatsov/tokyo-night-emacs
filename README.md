@@ -102,21 +102,50 @@ You can override individual colors without forking:
 Overrides apply to all variants. See the `tokyo-*-colors-alist`
 variables in `tokyo-night.el` for all available color names.
 
-To disable scaled headings in org, outline, markdown, shr, and info:
+### Appearance options
+
+A handful of booleans and numbers let you adjust the look without
+forking. They all take effect on the next `load-theme`.
+
+Headings in org, outline, markdown, adoc, asciidoc, shr and info are
+scaled by default. Turn that off for uniform sizes:
 
 ```emacs-lisp
 (setq tokyo-night-scale-headings nil)
-(load-theme 'tokyo-night t)
 ```
 
-To tweak individual scaling factors, use `custom-set-faces` after loading:
+Or keep the scaling but tune how much each level grows:
 
 ```emacs-lisp
-(load-theme 'tokyo-night t)
-(custom-set-faces
- '(org-level-1 ((t (:height 1.5))))
- '(org-level-2 ((t (:height 1.3)))))
+(setq tokyo-night-height-doc-title 1.5   ; document titles (default 1.4)
+      tokyo-night-height-1 1.4           ; level-1 headings (default 1.3)
+      tokyo-night-height-2 1.2           ; level-2 headings (default 1.2)
+      tokyo-night-height-3 1.1)          ; level-3 headings (default 1.1)
 ```
+
+Render headings in a proportional font, which reads nicely for prose:
+
+```emacs-lisp
+(setq tokyo-night-use-variable-pitch t)
+```
+
+![Variable-pitch headings, off and on](screenshots/variable-pitch.png)
+
+Comments and keywords are italic by default. If your font renders
+italics poorly, turn either off:
+
+```emacs-lisp
+(setq tokyo-night-italic-comments nil
+      tokyo-night-italic-keywords nil)
+```
+
+Drop the box around the mode line for a flat look:
+
+```emacs-lisp
+(setq tokyo-night-flat-mode-line t)
+```
+
+![Boxed vs flat mode line](screenshots/flat-mode-line.png)
 
 For a more visible current line highlight, use `tokyo-bg-highlight`
 instead of the default subtle `tokyo-bg-line`:
