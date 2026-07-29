@@ -74,6 +74,20 @@ Only takes effect when `tokyo-night-scale-headings' is non-nil."
   :type 'number
   :group 'tokyo-night)
 
+(defcustom tokyo-night-italic-comments t
+  "Whether to render comments in italic.
+Set to nil if your font renders italics poorly.  Takes effect on
+theme load."
+  :type 'boolean
+  :group 'tokyo-night)
+
+(defcustom tokyo-night-italic-keywords t
+  "Whether to render keywords in italic.
+Set to nil if your font renders italics poorly.  Takes effect on
+theme load."
+  :type 'boolean
+  :group 'tokyo-night)
+
 (defcustom tokyo-night-override-colors-alist '()
   "Alist of color overrides applied to all variants.
 Each entry should be a cons cell (NAME . VALUE) where NAME is a
@@ -412,7 +426,9 @@ Light variant.")
             (h1 (if tokyo-night-scale-headings tokyo-night-height-1 1.0))
             (h2 (if tokyo-night-scale-headings tokyo-night-height-2 1.0))
             (h3 (if tokyo-night-scale-headings tokyo-night-height-3 1.0))
-            (h-doc (if tokyo-night-scale-headings tokyo-night-height-doc-title 1.0)))
+            (h-doc (if tokyo-night-scale-headings tokyo-night-height-doc-title 1.0))
+            (comment-slant (if tokyo-night-italic-comments 'italic 'normal))
+            (keyword-slant (if tokyo-night-italic-keywords 'italic 'normal)))
 
         (custom-theme-set-faces
          theme-name
@@ -477,14 +493,14 @@ Light variant.")
 
 ;;;;; font-lock
          `(font-lock-builtin-face ((,class (:foreground ,tokyo-cyan-bright))))
-         `(font-lock-comment-face ((,class (:foreground ,tokyo-comment :slant italic))))
-         `(font-lock-comment-delimiter-face ((,class (:foreground ,tokyo-comment :slant italic))))
+         `(font-lock-comment-face ((,class (:foreground ,tokyo-comment :slant ,comment-slant))))
+         `(font-lock-comment-delimiter-face ((,class (:foreground ,tokyo-comment :slant ,comment-slant))))
          `(font-lock-constant-face ((,class (:foreground ,tokyo-orange))))
          `(font-lock-doc-face ((,class (:foreground ,tokyo-comment))))
          `(font-lock-doc-markup-face ((,class (:foreground ,tokyo-dark5))))
          `(font-lock-function-name-face ((,class (:foreground ,tokyo-blue))))
          `(font-lock-function-call-face ((,class (:foreground ,tokyo-blue))))
-         `(font-lock-keyword-face ((,class (:foreground ,tokyo-magenta :slant italic))))
+         `(font-lock-keyword-face ((,class (:foreground ,tokyo-magenta :slant ,keyword-slant))))
          `(font-lock-negation-char-face ((,class (:foreground ,tokyo-cyan-pale))))
          `(font-lock-number-face ((,class (:foreground ,tokyo-orange))))
          `(font-lock-operator-face ((,class (:foreground ,tokyo-cyan-pale))))

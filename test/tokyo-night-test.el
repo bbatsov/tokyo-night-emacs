@@ -121,6 +121,34 @@ frame-side face recomputation (which is unreliable in batch)."
       (expect (tokyo-night-test--face-attr 'markdown-header-face-1 'tokyo-night :height) :to-equal 2.0)
       (expect (tokyo-night-test--face-attr 'org-document-title 'tokyo-night :height) :to-equal 2.5))))
 
+;;; Italic toggles
+
+(describe "italic toggles"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (it "renders comments and keywords italic by default"
+    (tokyo-night-test--reload 'tokyo-night)
+    (expect (tokyo-night-test--face-attr 'font-lock-comment-face 'tokyo-night :slant) :to-equal 'italic)
+    (expect (tokyo-night-test--face-attr 'font-lock-keyword-face 'tokyo-night :slant) :to-equal 'italic))
+
+  (it "drops the comment italic when disabled"
+    (let ((tokyo-night-italic-comments nil))
+      (tokyo-night-test--reload 'tokyo-night))
+    (expect (tokyo-night-test--face-attr 'font-lock-comment-face 'tokyo-night :slant) :to-equal 'normal)
+    (expect (tokyo-night-test--face-attr 'font-lock-comment-delimiter-face 'tokyo-night :slant) :to-equal 'normal)
+    ;; keywords stay italic
+    (expect (tokyo-night-test--face-attr 'font-lock-keyword-face 'tokyo-night :slant) :to-equal 'italic))
+
+  (it "drops the keyword italic when disabled"
+    (let ((tokyo-night-italic-keywords nil))
+      (tokyo-night-test--reload 'tokyo-night))
+    (expect (tokyo-night-test--face-attr 'font-lock-keyword-face 'tokyo-night :slant) :to-equal 'normal)
+    ;; comments stay italic
+    (expect (tokyo-night-test--face-attr 'font-lock-comment-face 'tokyo-night :slant) :to-equal 'italic)))
+
 ;;; Palette integrity
 
 (describe "color palettes"
