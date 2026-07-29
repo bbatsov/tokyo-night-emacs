@@ -88,6 +88,13 @@ theme load."
   :type 'boolean
   :group 'tokyo-night)
 
+(defcustom tokyo-night-flat-mode-line nil
+  "Whether to render the mode line without its surrounding box.
+When non-nil the mode line is flat (borderless), relying on the
+background alone for separation.  Takes effect on theme load."
+  :type 'boolean
+  :group 'tokyo-night)
+
 (defcustom tokyo-night-override-colors-alist '()
   "Alist of color overrides applied to all variants.
 Each entry should be a cons cell (NAME . VALUE) where NAME is a
@@ -428,7 +435,11 @@ Light variant.")
             (h3 (if tokyo-night-scale-headings tokyo-night-height-3 1.0))
             (h-doc (if tokyo-night-scale-headings tokyo-night-height-doc-title 1.0))
             (comment-slant (if tokyo-night-italic-comments 'italic 'normal))
-            (keyword-slant (if tokyo-night-italic-keywords 'italic 'normal)))
+            (keyword-slant (if tokyo-night-italic-keywords 'italic 'normal))
+            (ml-box (unless tokyo-night-flat-mode-line
+                      (list :line-width -1 :color (c "tokyo-terminal-blk"))))
+            (ml-box-inactive (unless tokyo-night-flat-mode-line
+                               (list :line-width -1 :color (c "tokyo-bg-dark")))))
 
         (custom-theme-set-faces
          theme-name
@@ -466,9 +477,9 @@ Light variant.")
 
 ;;;;; mode-line
          `(mode-line ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark
-                                           :box (:line-width -1 :color ,tokyo-terminal-blk)))))
+                                           :box ,ml-box))))
          `(mode-line-inactive ((,class (:foreground ,tokyo-dark5 :background ,tokyo-bg-darkest
-                                                    :box (:line-width -1 :color ,tokyo-bg-dark)))))
+                                                    :box ,ml-box-inactive))))
          `(mode-line-buffer-id ((,class (:foreground ,tokyo-blue :weight bold))))
          `(mode-line-emphasis ((,class (:foreground ,tokyo-fg :weight bold))))
          `(mode-line-highlight ((,class (:foreground ,tokyo-magenta))))
