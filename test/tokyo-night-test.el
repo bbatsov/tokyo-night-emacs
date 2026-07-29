@@ -107,7 +107,19 @@ frame-side face recomputation (which is unreliable in batch)."
 
     (it "leaves shr top levels at 1.0"
       (dolist (face '(shr-h1 shr-h2 shr-h3))
-        (expect (tokyo-night-test--face-attr face 'tokyo-night :height) :to-equal 1.0)))))
+        (expect (tokyo-night-test--face-attr face 'tokyo-night :height) :to-equal 1.0))))
+
+  (describe "with custom scale factors"
+    (before-each
+      (let ((tokyo-night-scale-headings t)
+            (tokyo-night-height-1 2.0)
+            (tokyo-night-height-doc-title 2.5))
+        (tokyo-night-test--reload 'tokyo-night)))
+
+    (it "honors the per-level height factors"
+      (expect (tokyo-night-test--face-attr 'outline-1 'tokyo-night :height) :to-equal 2.0)
+      (expect (tokyo-night-test--face-attr 'markdown-header-face-1 'tokyo-night :height) :to-equal 2.0)
+      (expect (tokyo-night-test--face-attr 'org-document-title 'tokyo-night :height) :to-equal 2.5))))
 
 ;;; Palette integrity
 

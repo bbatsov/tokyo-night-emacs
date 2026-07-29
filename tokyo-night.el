@@ -43,8 +43,35 @@
 
 (defcustom tokyo-night-scale-headings t
   "Whether to scale headings in org, outline, markdown, shr, and info.
-Set to nil for uniform heading sizes.  Takes effect on theme load."
+Set to nil for uniform heading sizes.  The individual scale factors
+are controlled by `tokyo-night-height-doc-title' and
+`tokyo-night-height-1' through `tokyo-night-height-3'.  Takes effect
+on theme load."
   :type 'boolean
+  :group 'tokyo-night)
+
+(defcustom tokyo-night-height-doc-title 1.4
+  "Height multiplier for document titles (e.g. `org-document-title').
+Only takes effect when `tokyo-night-scale-headings' is non-nil."
+  :type 'number
+  :group 'tokyo-night)
+
+(defcustom tokyo-night-height-1 1.3
+  "Height multiplier for level-1 headings.
+Only takes effect when `tokyo-night-scale-headings' is non-nil."
+  :type 'number
+  :group 'tokyo-night)
+
+(defcustom tokyo-night-height-2 1.2
+  "Height multiplier for level-2 headings.
+Only takes effect when `tokyo-night-scale-headings' is non-nil."
+  :type 'number
+  :group 'tokyo-night)
+
+(defcustom tokyo-night-height-3 1.1
+  "Height multiplier for level-3 headings.
+Only takes effect when `tokyo-night-scale-headings' is non-nil."
+  :type 'number
   :group 'tokyo-night)
 
 (defcustom tokyo-night-override-colors-alist '()
@@ -382,10 +409,10 @@ Light variant.")
             (tokyo-heading4      (c "tokyo-heading4"))
             (tokyo-heading5      (c "tokyo-heading5"))
             (tokyo-heading6      (c "tokyo-heading6"))
-            (h1 (if tokyo-night-scale-headings 1.3 1.0))
-            (h2 (if tokyo-night-scale-headings 1.2 1.0))
-            (h3 (if tokyo-night-scale-headings 1.1 1.0))
-            (h-doc (if tokyo-night-scale-headings 1.4 1.0)))
+            (h1 (if tokyo-night-scale-headings tokyo-night-height-1 1.0))
+            (h2 (if tokyo-night-scale-headings tokyo-night-height-2 1.0))
+            (h3 (if tokyo-night-scale-headings tokyo-night-height-3 1.0))
+            (h-doc (if tokyo-night-scale-headings tokyo-night-height-doc-title 1.0)))
 
         (custom-theme-set-faces
          theme-name
