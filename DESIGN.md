@@ -6,6 +6,55 @@ The color palettes come directly from [folke's Tokyo Night](https://github.com/f
 and [enkia's VS Code theme](https://github.com/enkia/tokyo-night-vscode-theme). We don't invent new
 colors -- we map the existing palette to Emacs faces.
 
+## Coming from the Neovim palette
+
+Upstream doesn't keep four independent palettes, and the shape it does keep is
+worth knowing before you touch a color.
+
+Storm is the base. Night is a copy of Storm with a few background keys
+overridden, and Day is a programmatic inversion of Night:
+
+```lua
+-- colors/night.lua
+local ret = vim.deepcopy(require("tokyonight.colors.storm"))
+return vim.tbl_deep_extend("force", ret, {
+  bg = "#1a1b26", bg_dark = "#16161e", bg_dark1 = "#0C0E14",
+})
+```
+
+We flatten all of that into four complete alists, which loses the structure.
+Three things follow from the flattening, and each has caused a real bug here.
+
+**A value shared between variants stops looking shared.** Every entry in every
+alist looks equally deliberate, so there is nothing to tell you that Night and
+Storm carry the same `tokyo-bg-highlight` because upstream picked it once.
+
+**A color tuned against one background lands differently on another.** Night
+overrides `bg` and leaves `bg-highlight` alone, so its lift widens as a side
+effect. Storm kept the base pairing and sat at a contrast ratio of 1.08, near
+enough to invisible, until #8. When you change a background, check what was
+sitting on it. The suite pins a floor of 1.15 between `tokyo-bg` and
+`tokyo-bg-highlight` in every variant.
+
+**Upstream color roles are not Emacs face roles.** This is the one that catches
+people. `bg_highlight` drives CursorLine in Neovim, where being barely there is
+exactly the intent. Our nearest equivalent to CursorLine is `hl-line`, which
+takes `tokyo-bg-line` instead. `tokyo-bg-highlight` goes to `highlight`, and
+through it to `secondary-selection`, `widget-field`,
+`show-paren-match-expression`, `completions-highlight` and the ediff diff
+backgrounds, all of which the user is meant to notice. A color inherited from a
+group where subtlety is correct can be plainly wrong once it lands on an Emacs
+face that has to read.
+
+So when you map a new face, ask what the color does in Emacs rather than which
+Neovim group it came from. Faithfulness is about the palette, not about the
+role each color happened to play upstream.
+
+**`:background tokyo-bg` is not a background.** It is the default background,
+so it lifts nothing. It reads as deliberate in a face definition and does
+nothing at all on screen. If a face should stand out, give it `tokyo-bg-highlight`
+or a purpose-built shade.
+
 ## Consistent semantic color mapping
 
 Each color has a role, and that role is consistent across all faces:
