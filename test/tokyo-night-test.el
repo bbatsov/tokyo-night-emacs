@@ -34,6 +34,29 @@ Handles the naming quirk that the default Night theme uses
        'tokyo-night-colors-alist
      (intern (format "%s-colors-alist" variant)))))
 
+(defun tokyo-night-test--luminance (hex)
+  "Return the WCAG relative luminance of the color HEX."
+  (let ((channels (mapcar
+                   (lambda (offset)
+                     (let ((v (/ (string-to-number
+                                  (substring hex offset (+ offset 2)) 16)
+                                 255.0)))
+                       (if (<= v 0.04045)
+                           (/ v 12.92)
+                         (expt (/ (+ v 0.055) 1.055) 2.4))))
+                   '(1 3 5))))
+    (+ (* 0.2126 (nth 0 channels))
+       (* 0.7152 (nth 1 channels))
+       (* 0.0722 (nth 2 channels)))))
+
+(defun tokyo-night-test--contrast (a b)
+  "Return the WCAG contrast ratio between the colors A and B."
+  (let* ((la (tokyo-night-test--luminance a))
+         (lb (tokyo-night-test--luminance b))
+         (lighter (max la lb))
+         (darker (min la lb)))
+    (/ (+ lighter 0.05) (+ darker 0.05))))
+
 (defun tokyo-night-test--reload (variant)
   "Disable any active Tokyo Night theme and (re-)load VARIANT.
 Reloading re-evaluates the theme file, which picks up any let-bound
@@ -202,7 +225,18 @@ frame-side face recomputation (which is unreliable in batch)."
   (it "have hex-formatted color values"
     (dolist (variant tokyo-night-test--variants)
       (dolist (entry (tokyo-night-test--palette variant))
-        (expect (cdr entry) :to-match "\\`#[0-9a-fA-F]\\{6\\}\\'")))))
+        (expect (cdr entry) :to-match "\\`#[0-9a-fA-F]\\{6\\}\\'"))))
+
+  ;; `tokyo-bg-highlight' backs `highlight' and friends, so it has to read as
+  ;; a highlight.  Storm once carried Night's value on a much lighter
+  ;; background and came out at 1.08, near enough to invisible.
+  (it "lift tokyo-bg-highlight clear of tokyo-bg in every variant"
+    (dolist (variant tokyo-night-test--variants)
+      (let* ((palette (tokyo-night-test--palette variant))
+             (bg (cdr (assoc "tokyo-bg" palette)))
+             (highlight (cdr (assoc "tokyo-bg-highlight" palette))))
+        (expect (tokyo-night-test--contrast bg highlight)
+                :to-be-greater-than 1.15)))))
 
 ;;; Code-block backgrounds
 ;;

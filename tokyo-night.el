@@ -184,7 +184,10 @@ Darkest background variant.")
     ("tokyo-bg-darkest"    . "#1b1e2d")
     ("tokyo-bg-dark"       . "#1f2335")
     ("tokyo-bg"            . "#24283b")
-    ("tokyo-bg-highlight"  . "#292e42")
+    ;; Storm shares Night's upstream bg-highlight, but its background is
+    ;; several shades lighter, which left the two all but identical.  Moon's
+    ;; value restores the lift the other variants have.
+    ("tokyo-bg-highlight"  . "#2f334d")
     ("tokyo-bg-line"       . "#262b3e")
 
     ;; Foreground shades
