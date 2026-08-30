@@ -23,9 +23,9 @@
 ### Bug fixes
 
 * [#8](https://github.com/bbatsov/tokyo-night-emacs/pull/8): Give Storm a
-  visible `highlight` background; it carried Night's value on a much lighter
-  background, so `highlight` and everything drawing from it was nearly
-  invisible.
+  visible `highlight` background; it still used upstream's base pairing, where
+  `bg-highlight` sits a shade away from `bg`, so `highlight` and everything
+  drawing from it was nearly invisible.
 * Fix `tokyo-night-scale-headings` not affecting org-mode and other
   outline-based headings -- `outline-1..3` were missing `:height`, so
   the scale factors never flowed through to org (which inherits them).
