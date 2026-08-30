@@ -1819,7 +1819,7 @@ Light variant.")
 
 ;;;;; smartparens
          `(sp-show-pair-match-face ((,class (:foreground ,tokyo-cyan-pale :background ,tokyo-bracket :weight bold))))
-         `(sp-show-pair-mismatch-face ((,class (:foreground ,tokyo-red :background ,tokyo-bg :weight bold :underline t))))
+         `(sp-show-pair-mismatch-face ((,class (:foreground ,tokyo-red :background ,tokyo-bg-highlight :weight bold :underline t))))
          `(sp-pair-overlay-face ((,class (:background ,tokyo-bg-highlight))))
          `(sp-show-pair-match-content-face ((,class (:background ,tokyo-bg-highlight))))
 

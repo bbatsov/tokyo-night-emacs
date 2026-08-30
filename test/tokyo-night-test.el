@@ -238,6 +238,29 @@ frame-side face recomputation (which is unreliable in batch)."
         (expect (tokyo-night-test--contrast bg highlight)
                 :to-be-greater-than 1.15)))))
 
+;;; Smartparens mirrors the built-in paren faces
+;;
+;; DESIGN.md asks for these to look identical, and they drifted once
+;; already: 1.0.0 gave `show-paren-mismatch' a visible background and left
+;; `sp-show-pair-mismatch-face' sitting on plain `tokyo-bg'.
+
+(describe "smartparens pair faces"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (dolist (pair '((sp-show-pair-match-face    . show-paren-match)
+                  (sp-show-pair-mismatch-face . show-paren-mismatch)))
+    (dolist (variant tokyo-night-test--variants)
+      (it (format "gives %s the same colors as %s in %s"
+                  (car pair) (cdr pair) variant)
+        (tokyo-night-test--reload variant)
+        (dolist (attr '(:foreground :background))
+          (expect (tokyo-night-test--face-attr (car pair) variant attr)
+                  :to-equal
+                  (tokyo-night-test--face-attr (cdr pair) variant attr)))))))
+
 ;;; Code-block backgrounds
 ;;
 ;; Guards against the regression seen in a sibling theme where
