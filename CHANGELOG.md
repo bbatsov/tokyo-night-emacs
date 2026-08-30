@@ -6,6 +6,22 @@
 
 * [#6](https://github.com/bbatsov/tokyo-night-emacs/pull/6): Add appearance options: customizable heading scale factors (`tokyo-night-height-1` through `-height-3` and `-height-doc-title`), `tokyo-night-use-variable-pitch`, `tokyo-night-italic-comments`, `tokyo-night-italic-keywords` and `tokyo-night-flat-mode-line`.
 
+### Bug fixes
+
+* [#8](https://github.com/bbatsov/tokyo-night-emacs/pull/8): Give Storm a
+  visible `highlight` background; it still used upstream's base pairing, where
+  `bg-highlight` sits a shade away from `bg`, so `highlight` and everything
+  drawing from it was nearly invisible.
+* [#9](https://github.com/bbatsov/tokyo-night-emacs/pull/9): Give
+  `sp-show-pair-mismatch-face` a visible background, matching the fix
+  `show-paren-mismatch` got in 1.0.0.
+
+### Documentation
+
+* [#9](https://github.com/bbatsov/tokyo-night-emacs/pull/9): Document in
+  DESIGN.md how the Neovim palette maps onto Emacs faces, and where the two
+  disagree about what a color is for.
+
 ## 1.1.0 (2026-07-26)
 
 ### New features
@@ -22,10 +38,6 @@
 
 ### Bug fixes
 
-* [#8](https://github.com/bbatsov/tokyo-night-emacs/pull/8): Give Storm a
-  visible `highlight` background; it still used upstream's base pairing, where
-  `bg-highlight` sits a shade away from `bg`, so `highlight` and everything
-  drawing from it was nearly invisible.
 * Fix `tokyo-night-scale-headings` not affecting org-mode and other
   outline-based headings -- `outline-1..3` were missing `:height`, so
   the scale factors never flowed through to org (which inherits them).
