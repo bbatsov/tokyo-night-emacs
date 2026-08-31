@@ -271,6 +271,52 @@ frame-side face recomputation (which is unreliable in batch)."
         (expect (tokyo-night-test--contrast bg highlight)
                 :to-be-greater-than 1.15)))))
 
+;;; Backgrounds that match the buffer background
+;;
+;; Setting `:background' to the variant's own `tokyo-bg' is not the same as
+;; leaving it unset.  Unset lets whatever is underneath show through, such as
+;; `hl-line' or `region'; setting it explicitly punches a hole through them.
+;; So it lifts nothing and suppresses highlighting that should be visible.
+;; A handful of faces genuinely want to sit on the buffer background, and
+;; they are named here so any new arrival has to be a deliberate choice.
+
+(defconst tokyo-night-test--flat-background-faces
+  '(default                          ; definitional
+    fringe                           ; blends into the buffer it borders
+    term                             ; the terminal's own background
+    line-number                      ; the number column sits on the buffer
+    line-number-current-line
+    line-number-major-tick
+    line-number-minor-tick
+    centaur-tabs-selected            ; a selected tab joins the buffer below it
+    centaur-tabs-selected-modified
+    tab-bar-tab
+    tab-bar-tab-group-current
+    tab-line-tab
+    tab-line-tab-current)
+  "Faces allowed to set `:background' to the variant's own `tokyo-bg'.")
+
+(describe "faces sitting on the buffer background"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (dolist (variant tokyo-night-test--variants)
+    (it (format "only lets the allowed faces match tokyo-bg in %s" variant)
+      (tokyo-night-test--reload variant)
+      (let* ((palette (tokyo-night-test--palette variant))
+             (bg (cdr (assoc "tokyo-bg" palette)))
+             (offenders '()))
+        (mapatoms
+         (lambda (sym)
+           (when (and (get sym 'theme-face)
+                      (assoc variant (get sym 'theme-face))
+                      (equal (tokyo-night-test--face-attr sym variant :background) bg)
+                      (not (memq sym tokyo-night-test--flat-background-faces)))
+             (push sym offenders))))
+        (expect offenders :to-equal '())))))
+
 ;;; Smartparens mirrors the built-in paren faces
 ;;
 ;; DESIGN.md asks for these to look identical, and they drifted once
