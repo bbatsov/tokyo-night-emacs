@@ -18,6 +18,11 @@
 * [#10](https://github.com/bbatsov/tokyo-night-emacs/pull/10): Derive the diff
   backgrounds from each variant's own background; all twelve were too faint,
   and added on Day and removed/changed on Storm were invisible.
+* [#11](https://github.com/bbatsov/tokyo-night-emacs/pull/11): Give `match`,
+  `whitespace-empty`, `ido-indicator` and `gnus-summary-cancelled` real
+  backgrounds instead of the buffer background, which lifted nothing and hid
+  `hl-line` underneath; drop the background from `bookmark-face`, which is
+  foreground-only.
 
 ### Documentation
 
