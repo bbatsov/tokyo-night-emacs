@@ -36,6 +36,15 @@ enough to invisible, until #8. When you change a background, check what was
 sitting on it. The suite pins a floor of 1.15 between `tokyo-bg` and
 `tokyo-bg-highlight` in every variant.
 
+The diff backgrounds are the same story and are handled by deriving rather
+than picking. Each one is its accent color blended into that variant's own
+background, following how upstream builds its diff shades: green at 0.22 for
+added, `red-dark` at 0.25 for removed, `blue-dark` at 0.30 for changed. They
+scale with the variant by construction, and the suite checks both the recipe
+and the resulting lift. Upstream's own ratio for changed is 0.15, which is
+tuned for Neovim's DiffChange where faint is the intent; here the same color
+also backs magit's base face and ediff, which have to read, so it is stronger.
+
 **Upstream color roles are not Emacs face roles.** This is the one that catches
 people. `bg_highlight` drives CursorLine in Neovim, where being barely there is
 exactly the intent. Our nearest equivalent to CursorLine is `hl-line`, which

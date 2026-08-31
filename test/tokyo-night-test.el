@@ -57,6 +57,15 @@ Handles the naming quirk that the default Night theme uses
          (darker (min la lb)))
     (/ (+ lighter 0.05) (+ darker 0.05))))
 
+(defun tokyo-night-test--blend (fg bg alpha)
+  "Blend FG into BG by ALPHA, the way upstream derives its shades."
+  (apply #'format "#%02x%02x%02x"
+         (mapcar (lambda (offset)
+                   (let ((f (string-to-number (substring fg offset (+ offset 2)) 16))
+                         (b (string-to-number (substring bg offset (+ offset 2)) 16)))
+                     (floor (+ 0.5 (+ (* alpha f) (* (- 1 alpha) b))))))
+                 '(1 3 5))))
+
 (defun tokyo-night-test--reload (variant)
   "Disable any active Tokyo Night theme and (re-)load VARIANT.
 Reloading re-evaluates the theme file, which picks up any let-bound
@@ -230,6 +239,30 @@ frame-side face recomputation (which is unreliable in batch)."
   ;; `tokyo-bg-highlight' backs `highlight' and friends, so it has to read as
   ;; a highlight.  Storm once carried Night's value on a much lighter
   ;; background and came out at 1.08, near enough to invisible.
+  ;; The diff backgrounds are derived rather than hand-picked, so that a
+  ;; value tuned against one variant's background can't be copied onto
+  ;; another's and quietly go flat.  See DESIGN.md.
+  (it "derive the diff backgrounds from the variant's own background"
+    (dolist (variant tokyo-night-test--variants)
+      (let* ((palette (tokyo-night-test--palette variant))
+             (colour (lambda (name) (cdr (assoc name palette))))
+             (bg (funcall colour "tokyo-bg")))
+        (dolist (recipe '(("tokyo-diff-add-bg" "tokyo-green"     0.22)
+                          ("tokyo-diff-del-bg" "tokyo-red-dark"  0.25)
+                          ("tokyo-diff-chg-bg" "tokyo-blue-dark" 0.30)))
+          (expect (funcall colour (nth 0 recipe))
+                  :to-equal
+                  (tokyo-night-test--blend (funcall colour (nth 1 recipe))
+                                           bg (nth 2 recipe)))))))
+
+  (it "lift the diff backgrounds clear of tokyo-bg in every variant"
+    (dolist (variant tokyo-night-test--variants)
+      (let* ((palette (tokyo-night-test--palette variant))
+             (bg (cdr (assoc "tokyo-bg" palette))))
+        (dolist (name '("tokyo-diff-add-bg" "tokyo-diff-del-bg" "tokyo-diff-chg-bg"))
+          (expect (tokyo-night-test--contrast bg (cdr (assoc name palette)))
+                  :to-be-greater-than 1.15)))))
+
   (it "lift tokyo-bg-highlight clear of tokyo-bg in every variant"
     (dolist (variant tokyo-night-test--variants)
       (let* ((palette (tokyo-night-test--palette variant))
