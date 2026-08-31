@@ -165,9 +165,13 @@ replacement hex color string."
     ("tokyo-git-change"    . "#6183bb")
     ("tokyo-git-delete"    . "#914c54")
     ("tokyo-git-ignored"   . "#515670")
-    ("tokyo-diff-add-bg"   . "#1a3a3a")
-    ("tokyo-diff-del-bg"   . "#3a2020")
-    ("tokyo-diff-chg-bg"   . "#1a2a4a")
+    ;; Blended into this variant's own background, the way upstream derives
+    ;; its diff colors: green at 0.22, red-dark at 0.25, blue-dark at 0.30.
+    ;; Hand-picked values tuned against one background do not survive being
+    ;; copied to another; see DESIGN.md.
+    ("tokyo-diff-add-bg"   . "#374235")
+    ("tokyo-diff-del-bg"   . "#4a272f")
+    ("tokyo-diff-chg-bg"   . "#252e4b")
 
     ;; Headings
     ("tokyo-heading1"      . "#89ddff")
@@ -236,9 +240,13 @@ Darkest background variant.")
     ("tokyo-git-change"    . "#6183bb")
     ("tokyo-git-delete"    . "#914c54")
     ("tokyo-git-ignored"   . "#515670")
-    ("tokyo-diff-add-bg"   . "#1a3a3a")
-    ("tokyo-diff-del-bg"   . "#3a2020")
-    ("tokyo-diff-chg-bg"   . "#1a2a4a")
+    ;; Blended into this variant's own background, the way upstream derives
+    ;; its diff colors: green at 0.22, red-dark at 0.25, blue-dark at 0.30.
+    ;; Hand-picked values tuned against one background do not survive being
+    ;; copied to another; see DESIGN.md.
+    ("tokyo-diff-add-bg"   . "#3f4d45")
+    ("tokyo-diff-del-bg"   . "#52313f")
+    ("tokyo-diff-chg-bg"   . "#2c375a")
 
     ;; Headings
     ("tokyo-heading1"      . "#89ddff")
@@ -303,9 +311,13 @@ Medium background variant, same accents as night.")
     ("tokyo-git-change"    . "#7ca1f2")
     ("tokyo-git-delete"    . "#e26a75")
     ("tokyo-git-ignored"   . "#545c7e")
-    ("tokyo-diff-add-bg"   . "#273330")
-    ("tokyo-diff-del-bg"   . "#3a2028")
-    ("tokyo-diff-chg-bg"   . "#1e2a4a")
+    ;; Blended into this variant's own background, the way upstream derives
+    ;; its diff colors: green at 0.22, red-dark at 0.25, blue-dark at 0.30.
+    ;; Hand-picked values tuned against one background do not survive being
+    ;; copied to another; see DESIGN.md.
+    ("tokyo-diff-add-bg"   . "#454f49")
+    ("tokyo-diff-del-bg"   . "#4b2a3d")
+    ("tokyo-diff-chg-bg"   . "#2a3866")
 
     ;; Headings
     ("tokyo-heading1"      . "#89ddff")
@@ -370,9 +382,13 @@ Blue-tinted dark variant with unique accents.")
     ("tokyo-git-change"    . "#506d9c")
     ("tokyo-git-delete"    . "#c47981")
     ("tokyo-git-ignored"   . "#8990b3")
-    ("tokyo-diff-add-bg"   . "#cee8d0")
-    ("tokyo-diff-del-bg"   . "#ecd0d4")
-    ("tokyo-diff-chg-bg"   . "#d0dcea")
+    ;; Blended into this variant's own background, the way upstream derives
+    ;; its diff colors: green at 0.22, red-dark at 0.25, blue-dark at 0.30.
+    ;; Hand-picked values tuned against one background do not survive being
+    ;; copied to another; see DESIGN.md.
+    ("tokyo-diff-add-bg"   . "#c3cac1")
+    ("tokyo-diff-del-bg"   . "#dababe")
+    ("tokyo-diff-chg-bg"   . "#c2c9e4")
 
     ;; Headings
     ("tokyo-heading1"      . "#006a83")
