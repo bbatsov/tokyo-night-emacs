@@ -570,7 +570,7 @@ Light variant.")
          `(isearch-group-1 ((,class (:foreground ,tokyo-bg :background ,tokyo-blue))))
          `(isearch-group-2 ((,class (:foreground ,tokyo-bg :background ,tokyo-teal))))
          `(lazy-highlight ((,class (:foreground ,tokyo-fg :background ,tokyo-blue-dark))))
-         `(match ((,class (:foreground ,tokyo-green :background ,tokyo-bg :weight bold))))
+         `(match ((,class (:foreground ,tokyo-fg :background ,tokyo-blue-dark))))
          `(query-replace ((,class (:foreground ,tokyo-bg :background ,tokyo-orange :weight bold))))
 
 ;;;;; show-paren
@@ -712,7 +712,7 @@ Light variant.")
          `(gnus-header-name ((,class (:foreground ,tokyo-magenta))))
          `(gnus-header-newsgroups ((,class (:foreground ,tokyo-teal :weight bold))))
          `(gnus-header-subject ((,class (:foreground ,tokyo-fg :weight bold))))
-         `(gnus-summary-cancelled ((,class (:foreground ,tokyo-red :background ,tokyo-bg))))
+         `(gnus-summary-cancelled ((,class (:foreground ,tokyo-red :background ,tokyo-bg-highlight :extend t))))
          `(gnus-summary-normal-ancient ((,class (:foreground ,tokyo-comment))))
          `(gnus-summary-normal-read ((,class (:foreground ,tokyo-dark5))))
          `(gnus-summary-normal-ticked ((,class (:foreground ,tokyo-fg-dark :slant italic))))
@@ -749,7 +749,7 @@ Light variant.")
          `(ido-only-match ((,class (:foreground ,tokyo-teal :weight bold))))
          `(ido-subdir ((,class (:foreground ,tokyo-blue))))
          `(ido-incomplete-regexp ((,class (:foreground ,tokyo-red-dark))))
-         `(ido-indicator ((,class (:foreground ,tokyo-yellow :background ,tokyo-bg))))
+         `(ido-indicator ((,class (:foreground ,tokyo-bg :background ,tokyo-red))))
          `(ido-virtual ((,class (:foreground ,tokyo-comment))))
 
 ;;;;; info
@@ -975,7 +975,7 @@ Light variant.")
          `(term-color-white ((,class (:foreground ,tokyo-line-nr-cur :background ,tokyo-line-nr-cur))))
 
 ;;;;; whitespace-mode
-         `(whitespace-empty ((,class (:foreground ,tokyo-red :background ,tokyo-bg))))
+         `(whitespace-empty ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg :extend t))))
          `(whitespace-hspace ((,class (:foreground ,tokyo-whitespace))))
          `(whitespace-indentation ((,class (:foreground ,tokyo-whitespace))))
          `(whitespace-line ((,class (:foreground ,tokyo-red :background ,tokyo-bg-highlight))))
@@ -998,7 +998,7 @@ Light variant.")
 
 ;;;; Built-in packages
 ;;;;; bookmark
-         `(bookmark-face ((,class (:foreground ,tokyo-yellow :background ,tokyo-bg))))
+         `(bookmark-face ((,class (:foreground ,tokyo-yellow))))
 
 ;;;;; calendar
          `(calendar-today ((,class (:foreground ,tokyo-blue :weight bold :underline t))))
