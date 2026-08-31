@@ -15,6 +15,9 @@
 * [#9](https://github.com/bbatsov/tokyo-night-emacs/pull/9): Give
   `sp-show-pair-mismatch-face` a visible background, matching the fix
   `show-paren-mismatch` got in 1.0.0.
+* [#10](https://github.com/bbatsov/tokyo-night-emacs/pull/10): Derive the diff
+  backgrounds from each variant's own background; all twelve were too faint,
+  and added on Day and removed/changed on Storm were invisible.
 
 ### Documentation
 
