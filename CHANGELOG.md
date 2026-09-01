@@ -18,6 +18,14 @@
 * [#10](https://github.com/bbatsov/tokyo-night-emacs/pull/10): Derive the diff
   backgrounds from each variant's own background; all twelve were too faint,
   and added on Day and removed/changed on Storm were invisible.
+* [#13](https://github.com/bbatsov/tokyo-night-emacs/pull/13): Fix
+  `tokyo-night-get-color`, `tokyo-night-with-colors`, `tokyo-night-reload` and
+  `tokyo-night-list-colors` failing with "No Tokyo theme is active" on Emacs 27
+  and 28, which never set the active variant.
+* [#13](https://github.com/bbatsov/tokyo-night-emacs/pull/13): Make face text
+  readable on its own background: `match` and the other search highlights were
+  blue on blue in Day, and the diff line faces used a muted foreground on a
+  same-hue background.
 * [#11](https://github.com/bbatsov/tokyo-night-emacs/pull/11): Give `match`,
   `whitespace-empty`, `ido-indicator` and `gnus-summary-cancelled` real
   backgrounds instead of the buffer background, which lifted nothing and hid
