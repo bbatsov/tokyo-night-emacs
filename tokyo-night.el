@@ -402,8 +402,16 @@ Light variant.")
 
 ;;; Face Application
 
+(defvar tokyo-night--current nil
+  "The currently active Tokyo theme, or nil.")
+
 (defun tokyo-night--apply-theme (theme-name colors-alist)
   "Apply the Tokyo Night face definitions to THEME-NAME using COLORS-ALIST."
+  ;; `enable-theme-functions' only exists from Emacs 29, so on 27 and 28 the
+  ;; hooks below never fire and every command reading `tokyo-night--current'
+  ;; fails with "No Tokyo theme is active".  Record it here too, since this
+  ;; runs on every `load-theme' whatever the version.
+  (setq tokyo-night--current theme-name)
   (let* ((merged (append tokyo-night-override-colors-alist colors-alist))
          (class '((class color) (min-colors 88))))
     (cl-flet ((c (name) (cdr (assoc name merged))))
@@ -2190,9 +2198,6 @@ Uses the WCAG 2.0 formula."
        (* 0.0722 (funcall adjust b)))))
 
 ;;; User Commands
-
-(defvar tokyo-night--current nil
-  "The currently active Tokyo theme, or nil.")
 
 (defconst tokyo-night--variants
   '(tokyo-night tokyo-night-storm tokyo-night-moon tokyo-night-day)
