@@ -484,6 +484,124 @@ DESIGN.md before reaching for the palette to close the gap.")
       (expect (seq-remove (lambda (name) (member name defined)) used)
               :to-equal '()))))
 
+;;; Options in combination
+;;
+;; Each toggle is covered on its own above.  Heading scale and variable pitch
+;; are the pair that touches the same faces, so they are the pair worth
+;; checking together.
+
+(describe "scale-headings and use-variable-pitch together"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (it "scales and switches pitch when both are on"
+    (let ((tokyo-night-use-variable-pitch t)
+          (tokyo-night-scale-headings t))
+      (tokyo-night-test--reload 'tokyo-night))
+    (expect (tokyo-night-test--face-attr 'outline-1 'tokyo-night :inherit)
+            :to-equal 'variable-pitch)
+    (expect (tokyo-night-test--face-attr 'outline-1 'tokyo-night :height)
+            :to-equal tokyo-night-height-1))
+
+  (it "keeps the pitch switch when scaling is off"
+    (let ((tokyo-night-use-variable-pitch t)
+          (tokyo-night-scale-headings nil))
+      (tokyo-night-test--reload 'tokyo-night))
+    (expect (tokyo-night-test--face-attr 'outline-1 'tokyo-night :inherit)
+            :to-equal 'variable-pitch)
+    (expect (tokyo-night-test--face-attr 'outline-1 'tokyo-night :height)
+            :to-equal 1.0))
+
+  (it "keeps scaling when the pitch switch is off"
+    (let ((tokyo-night-use-variable-pitch nil)
+          (tokyo-night-scale-headings t))
+      (tokyo-night-test--reload 'tokyo-night))
+    (expect (tokyo-night-test--face-attr 'outline-1 'tokyo-night :inherit)
+            :to-equal 'default)
+    (expect (tokyo-night-test--face-attr 'outline-1 'tokyo-night :height)
+            :to-equal tokyo-night-height-1))
+
+  (it "orders the heading levels from largest to smallest"
+    (let ((tokyo-night-scale-headings t))
+      (tokyo-night-test--reload 'tokyo-night))
+    (let ((heights (mapcar (lambda (face)
+                             (tokyo-night-test--face-attr face 'tokyo-night :height))
+                           '(outline-1 outline-2 outline-3))))
+      (expect heights :to-equal (reverse (sort (copy-sequence heights) #'<)))
+      (expect (car (last heights)) :to-be-greater-than 1.0))))
+
+;;; Package headers
+;;
+;; package-lint used to cover this and was dropped, since the only thing it
+;; reported for this project was a false positive about a face it mistook for
+;; a removed function.  These are the parts of its job worth keeping.
+
+(defconst tokyo-night-test--source-files
+  (let ((dir (file-name-directory tokyo-night-test--source-file)))
+    (mapcar (lambda (name) (expand-file-name name dir))
+            '("tokyo-night.el" "tokyo-night-theme.el" "tokyo-night-storm-theme.el"
+              "tokyo-night-moon-theme.el" "tokyo-night-day-theme.el")))
+  "Every file that ships in the package.")
+
+(defun tokyo-night-test--file-text (file)
+  (with-temp-buffer (insert-file-contents file) (buffer-string)))
+
+(describe "package headers"
+  (dolist (file tokyo-night-test--source-files)
+    (let ((name (file-name-nondirectory file)))
+      (it (format "%s opens with a summary and a lexical-binding cookie" name)
+        (let ((first-line (car (split-string (tokyo-night-test--file-text file) "\n"))))
+          (expect first-line :to-match
+                  (rx-to-string '(seq ";;; " (1+ nonl) " --- " (1+ nonl)
+                                      "-*- lexical-binding: t; -*-")))))
+
+      (it (format "%s closes with the conventional footer" name)
+        (expect (string-trim-right (tokyo-night-test--file-text file))
+                :to-match (rx-to-string `(seq ";;; " ,name " ends here" eos))))))
+
+  (it "declares the headers a package needs"
+    (let ((text (tokyo-night-test--file-text tokyo-night-test--source-file)))
+      (dolist (header '("Author" "URL" "Version" "Package-Requires" "Keywords"))
+        (expect (string-match-p (concat "^;; " header ": ") text) :not :to-be nil))))
+
+  (it "declares a Package-Requires that reads back as an alist"
+    (let* ((text (tokyo-night-test--file-text tokyo-night-test--source-file))
+           (_ (string-match "^;; Package-Requires: \\(.*\\)$" text))
+           (deps (car (read-from-string (match-string 1 text)))))
+      (expect (assq 'emacs deps) :not :to-be nil)
+      (expect (version-to-list (cadr (assq 'emacs deps))) :not :to-be nil)))
+
+  (it "gives Version something version-to-list accepts"
+    (let ((text (tokyo-night-test--file-text tokyo-night-test--source-file)))
+      (string-match "^;; Version: \\(.*\\)$" text)
+      (expect (version-to-list (string-trim (match-string 1 text))) :not :to-be nil))))
+
+;;; Emphasis restraint
+;;
+;; DESIGN.md: "Avoid combining too many attributes (bold + italic + underline
+;; + color).  One or two is usually enough."
+
+(describe "emphasis"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (it "never stacks three emphasis attributes on one face"
+    (tokyo-night-test--reload 'tokyo-night)
+    (let ((overwrought '()))
+      (mapatoms
+       (lambda (sym)
+         (when (assoc 'tokyo-night (get sym 'theme-face))
+           (let ((n (seq-count
+                     (lambda (attr)
+                       (tokyo-night-test--face-attr sym 'tokyo-night attr))
+                     '(:weight :slant :underline :box :overline :strike-through))))
+             (when (> n 2) (push sym overwrought))))))
+      (expect overwrought :to-equal '()))))
+
 ;;; Public API
 
 (describe "the public API"
