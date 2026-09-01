@@ -21,6 +21,12 @@
   (add-to-list 'custom-theme-load-path
                (expand-file-name ".." dir)))
 
+(defconst tokyo-night-test--source-file
+  (expand-file-name
+   "../tokyo-night.el"
+   (file-name-directory (or load-file-name buffer-file-name default-directory)))
+  "Path to the theme source, for the checks that read it as text.")
+
 (defvar tokyo-night-test--variants
   '(tokyo-night tokyo-night-storm tokyo-night-moon tokyo-night-day)
   "All theme variants exercised by the suite.")
@@ -415,6 +421,147 @@ nothing slips further; raise it as Day gets retuned.")
       (tokyo-night-test--reload variant)
       (expect (tokyo-night-test--face-attr 'markdown-code-face variant :background)
               :not :to-be nil))))
+
+;;; The shape of the source itself
+;;
+;; Cheap guards over things that are true today and would rot silently: 1300
+;; face definitions is more than anyone reviews by hand.
+
+(defun tokyo-night-test--face-body ()
+  "Return the part of the source holding the face definitions."
+  (with-temp-buffer
+    (insert-file-contents tokyo-night-test--source-file)
+    (goto-char (point-min))
+    (search-forward "basic coloring")
+    (buffer-substring-no-properties (point) (point-max))))
+
+(defun tokyo-night-test--matches (regexp string &optional group)
+  "Return every GROUP match of REGEXP in STRING."
+  (let ((start 0) (found '()))
+    (while (string-match regexp string start)
+      (push (match-string (or group 1) string) found)
+      (setq start (match-end 0)))
+    (nreverse found)))
+
+(describe "the source"
+  (it "defines each face exactly once"
+    (let* ((faces (tokyo-night-test--matches
+                   "`(\\([^ ()]+\\) ((,class" (tokyo-night-test--face-body)))
+           (seen (make-hash-table :test 'equal))
+           (dupes '()))
+      (dolist (face faces)
+        (when (gethash face seen) (push face dupes))
+        (puthash face t seen))
+      (expect (delete-dups dupes) :to-equal '())))
+
+  (it "takes every color from the palette rather than hardcoding it"
+    (expect (tokyo-night-test--matches
+             ":\\(?:fore\\|back\\)ground \\(\"#[0-9a-fA-F]\\{6\\}\"\\)"
+             (tokyo-night-test--face-body))
+            :to-equal '()))
+
+  ;; The palette is public: `tokyo-night-get-color' and
+  ;; `tokyo-night-with-colors' hand it to users, so an entry no face uses is
+  ;; still worth carrying.  It just has to be deliberate rather than a
+  ;; leftover, which is what this list is for.
+  (it "uses every palette entry, bar the ones kept only for the API"
+    (let* ((palette-only '("tokyo-blue7"))
+           (body (tokyo-night-test--face-body))
+           (used (tokyo-night-test--matches ",\\(tokyo-[a-z0-9-]+\\)" body))
+           (unused (seq-remove (lambda (name)
+                                 (or (member name used) (member name palette-only)))
+                               (mapcar #'car (tokyo-night-test--palette 'tokyo-night)))))
+      (expect unused :to-equal '())))
+
+  (it "only refers to colors the palette defines"
+    (let* ((defined (mapcar #'car (tokyo-night-test--palette 'tokyo-night)))
+           (used (delete-dups (tokyo-night-test--matches
+                               ",\\(tokyo-[a-z0-9-]+\\)" (tokyo-night-test--face-body)))))
+      (expect (seq-remove (lambda (name) (member name defined)) used)
+              :to-equal '()))))
+
+;;; Public API
+
+(describe "the public API"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v)))
+    (setq tokyo-night-override-colors-alist '()))
+
+  (it "reads a color from the active variant"
+    (tokyo-night-test--reload 'tokyo-night-storm)
+    (expect (tokyo-night-get-color "tokyo-bg") :to-equal "#24283b"))
+
+  (it "reads a color from a variant that isn't active"
+    (tokyo-night-test--reload 'tokyo-night-storm)
+    (expect (tokyo-night-get-color "tokyo-bg" 'tokyo-night-day) :to-equal "#e1e2e7"))
+
+  ;; `enable-theme-functions' only exists from Emacs 29.  Without this, every
+  ;; command that reads the active variant fails on 27 and 28 with "No Tokyo
+  ;; theme is active", which is every Emacs in the support range below 29.
+  (it "knows the active variant without enable-theme-functions"
+    (let ((enable-theme-functions nil)
+          (disable-theme-functions nil))
+      (setq tokyo-night--current nil)
+      (tokyo-night-test--reload 'tokyo-night-moon)
+      (expect tokyo-night--current :to-be 'tokyo-night-moon)
+      (expect (tokyo-night-get-color "tokyo-bg") :to-equal "#222436")))
+
+  (it "binds every palette color inside tokyo-night-with-colors"
+    (tokyo-night-test--reload 'tokyo-night-storm)
+    (expect (tokyo-night-with-colors (list tokyo-bg tokyo-blue))
+            :to-equal (list "#24283b" (tokyo-night-get-color "tokyo-blue"))))
+
+  (it "lets tokyo-night-override-colors-alist win"
+    (tokyo-night-test--reload 'tokyo-night-storm)
+    (setq tokyo-night-override-colors-alist '(("tokyo-bg" . "#000000")))
+    (expect (tokyo-night-get-color "tokyo-bg") :to-equal "#000000")
+    (expect (tokyo-night-with-colors tokyo-bg) :to-equal "#000000"))
+
+  (it "reapplies an override on reload"
+    (tokyo-night-test--reload 'tokyo-night-storm)
+    (setq tokyo-night-override-colors-alist '(("tokyo-bg" . "#010203")))
+    (tokyo-night-reload)
+    (expect (tokyo-night-test--face-attr 'default 'tokyo-night-storm :background)
+            :to-equal "#010203"))
+
+  (it "refuses to reload when no variant is active"
+    (setq tokyo-night--current nil)
+    (expect (tokyo-night-reload) :to-throw 'user-error))
+
+  (it "renders the palette buffer without error"
+    (tokyo-night-test--reload 'tokyo-night-storm)
+    (tokyo-night-list-colors)
+    (expect (get-buffer "*Tokyo Palette: tokyo-night-storm*") :not :to-be nil)))
+
+;;; Switching between variants
+
+(describe "tokyo-night-select"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (it "leaves exactly one variant enabled"
+    (tokyo-night-test--reload 'tokyo-night)
+    (spy-on 'completing-read :and-return-value "tokyo-night-moon")
+    (tokyo-night-select)
+    (expect (seq-filter #'custom-theme-enabled-p tokyo-night-test--variants)
+            :to-equal '(tokyo-night-moon)))
+
+  (it "tracks the variant it switched to"
+    (tokyo-night-test--reload 'tokyo-night)
+    (spy-on 'completing-read :and-return-value "tokyo-night-day")
+    (tokyo-night-select)
+    (expect tokyo-night--current :to-be 'tokyo-night-day))
+
+  (it "runs tokyo-night-after-load-hook with the chosen variant"
+    (let* ((seen '())
+           (tokyo-night-after-load-hook (list (lambda (theme) (push theme seen)))))
+      (spy-on 'completing-read :and-return-value "tokyo-night-storm")
+      (tokyo-night-select)
+      (expect seen :to-equal '(tokyo-night-storm)))))
 
 ;;; Variant loading smoke tests
 
