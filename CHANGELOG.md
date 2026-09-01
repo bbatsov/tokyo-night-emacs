@@ -18,6 +18,10 @@
 * [#10](https://github.com/bbatsov/tokyo-night-emacs/pull/10): Derive the diff
   backgrounds from each variant's own background; all twelve were too faint,
   and added on Day and removed/changed on Storm were invisible.
+* [#14](https://github.com/bbatsov/tokyo-night-emacs/pull/14): Stop backing
+  text with `tokyo-terminal-blk`, an ANSI palette entry no Day foreground reads
+  against; magit's hunk and conflict headings now match the file heading beside
+  them.
 * [#13](https://github.com/bbatsov/tokyo-night-emacs/pull/13): Fix
   `tokyo-night-get-color`, `tokyo-night-with-colors`, `tokyo-night-reload` and
   `tokyo-night-list-colors` failing with "No Tokyo theme is active" on Emacs 27
