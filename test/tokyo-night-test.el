@@ -271,6 +271,64 @@ frame-side face recomputation (which is unreliable in batch)."
         (expect (tokyo-night-test--contrast bg highlight)
                 :to-be-greater-than 1.15)))))
 
+;;; Text has to be readable on its own background
+;;
+;; The palette tests below compare backgrounds against `tokyo-bg'.  That says
+;; nothing about whether a face's own text reads on its own background, which
+;; is how `match' ended up as blue on blue in Day and `diff-removed' as a
+;; muted red on a red wash.
+
+(defconst tokyo-night-test--dim-colors
+  '("tokyo-comment" "tokyo-dark3" "tokyo-dark5" "tokyo-fg-gutter" "tokyo-line-nr"
+    "tokyo-whitespace" "tokyo-git-ignored" "tokyo-indent" "tokyo-bracket"
+    "tokyo-terminal-blk")
+  "Palette entries DESIGN.md hands to de-emphasized text.
+A face reaching for one of these is asking to recede, so it opts out of
+the contrast floor rather than needing an entry in an exception list.")
+
+(defconst tokyo-night-test--legibility-floor 3.0
+  "Contrast a face's own text must reach against its own background.")
+
+(defconst tokyo-night-test--day-legibility-floor 2.0
+  "The same floor for Day, which is lower because Day is behind.
+Day is built upstream by inverting Night, and inversion preserves hue
+relationships without preserving contrast, so it runs 2-3:1 in places
+where the dark variants run 4-9:1.  This pins the current worst value so
+nothing slips further; raise it as Day gets retuned.")
+
+(defun tokyo-night-test--dim-p (variant color)
+  "Return non-nil if COLOR is one of VARIANT's de-emphasized palette entries."
+  (let ((palette (tokyo-night-test--palette variant)))
+    (seq-some (lambda (name) (equal color (cdr (assoc name palette))))
+              tokyo-night-test--dim-colors)))
+
+(describe "text on its own background"
+  (after-each
+    (dolist (v tokyo-night-test--variants)
+      (when (custom-theme-enabled-p v)
+        (disable-theme v))))
+
+  (dolist (variant tokyo-night-test--variants)
+    (it (format "stays readable in %s" variant)
+      (tokyo-night-test--reload variant)
+      (let ((floor (if (eq variant 'tokyo-night-day)
+                       tokyo-night-test--day-legibility-floor
+                     tokyo-night-test--legibility-floor))
+            (illegible '()))
+        (mapatoms
+         (lambda (sym)
+           (let ((fg (tokyo-night-test--face-attr sym variant :foreground))
+                 (bg (tokyo-night-test--face-attr sym variant :background)))
+             (when (and (stringp fg) (stringp bg)
+                        ;; the ansi and term color faces set foreground and
+                        ;; background to the same value on purpose, so a
+                        ;; terminal can use either
+                        (not (string-match-p "\\`\\(ansi\\|term\\)-color-" (symbol-name sym)))
+                        (not (tokyo-night-test--dim-p variant fg))
+                        (< (tokyo-night-test--contrast fg bg) floor))
+               (push (list sym (tokyo-night-test--contrast fg bg)) illegible)))))
+        (expect illegible :to-equal '())))))
+
 ;;; Backgrounds that match the buffer background
 ;;
 ;; Setting `:background' to the variant's own `tokyo-bg' is not the same as
