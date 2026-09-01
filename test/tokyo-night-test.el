@@ -295,12 +295,16 @@ the contrast floor rather than needing an entry in an exception list.")
 (defconst tokyo-night-test--legibility-floor 3.0
   "Contrast a face's own text must reach against its own background.")
 
-(defconst tokyo-night-test--day-legibility-floor 2.0
-  "The same floor for Day, which is lower because Day is behind.
-Day is built upstream by inverting Night, and inversion preserves hue
-relationships without preserving contrast, so it runs 2-3:1 in places
-where the dark variants run 4-9:1.  This pins the current worst value so
-nothing slips further; raise it as Day gets retuned.")
+(defconst tokyo-night-test--day-legibility-floor 2.1
+  "The same floor for Day, which upstream builds to be less contrasty.
+Day inverts Night's HSLuv lightness and then lightens whatever came out
+dark, scaled by upstream's `day_brightness', which its own docs describe
+as running \"from dull to vibrant colors\".  Vibrant costs contrast: Day's
+accents sit at 3-4:1 against the background where the dark variants reach
+6-10:1, so pairings that are comfortable there land near 2:1 here.  That
+is Tokyo Night's decision rather than drift, so this floor pins the
+current worst value instead of demanding the dark variants' 3.0.  See
+DESIGN.md before reaching for the palette to close the gap.")
 
 (defun tokyo-night-test--dim-p (variant color)
   "Return non-nil if COLOR is one of VARIANT's de-emphasized palette entries."
