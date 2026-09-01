@@ -59,6 +59,29 @@ So when you map a new face, ask what the color does in Emacs rather than which
 Neovim group it came from. Faithfulness is about the palette, not about the
 role each color happened to play upstream.
 
+**Day is meant to be less contrasty, so don't "fix" it.** Upstream builds Day
+by inverting Night's HSLuv lightness and then lightening whatever came out
+dark, scaled by `day_brightness`, which upstream documents as running "from
+dull to vibrant colors":
+
+```lua
+hsl[3] = 100 - hsl[3]
+if hsl[3] < 40 then hsl[3] = hsl[3] + (100 - hsl[3]) * M.day_brightness end
+```
+
+Vibrancy costs contrast. Day's accents sit at 3 to 4:1 against the background
+where the dark variants reach 6 to 10:1, which is why a pairing that is
+comfortable in Night can land near 2:1 in Day. Darkening the accents would buy
+contrast at the price of no longer looking like Tokyo Night Day, so the suite
+holds Day to a lower legibility floor rather than treating the gap as a bug.
+Anyone who wants more contrast has `tokyo-night-override-colors-alist`.
+
+What is still worth fixing in Day is a pairing we chose rather than inherited.
+`tokyo-terminal-blk` is an ANSI palette entry, not a UI layer, and using it to
+back text gave Day its worst readings until magit's hunk and conflict headings
+moved onto `tokyo-bg-highlight`, which is what the file heading beside them
+already used.
+
 **`:background tokyo-bg` is not a background.** It is the default background,
 so it lifts nothing. It reads as deliberate in a face definition and does
 nothing at all on screen. If a face should stand out, give it `tokyo-bg-highlight`

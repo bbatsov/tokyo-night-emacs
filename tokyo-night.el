@@ -1055,7 +1055,7 @@ Light variant.")
          `(eww-form-checkbox ((,class (:foreground ,tokyo-blue :weight bold))))
          `(eww-form-select ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight
                                                  :box (:line-width -1 :color ,tokyo-terminal-blk)))))
-         `(eww-form-submit ((,class (:foreground ,tokyo-fg :background ,tokyo-terminal-blk
+         `(eww-form-submit ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight
                                                  :box (:line-width -1 :color ,tokyo-dark5)))))
 
 ;;;;; man
@@ -1370,10 +1370,10 @@ Light variant.")
          `(magit-diff-file-heading-highlight ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight :weight bold :extend t))))
          `(magit-diff-file-heading-selection ((,class (:foreground ,tokyo-orange :background ,tokyo-bg-highlight :weight bold :extend t))))
          `(magit-diff-hunk-heading ((,class (:foreground ,tokyo-fg-dark :background ,tokyo-bg-dark :extend t))))
-         `(magit-diff-hunk-heading-highlight ((,class (:foreground ,tokyo-fg :background ,tokyo-terminal-blk :extend t))))
+         `(magit-diff-hunk-heading-highlight ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight :extend t))))
          `(magit-diff-hunk-heading-selection ((,class (:foreground ,tokyo-fg :background ,tokyo-selection :extend t))))
          `(magit-diff-conflict-heading ((,class (:foreground ,tokyo-yellow :background ,tokyo-bg-dark :extend t))))
-         `(magit-diff-conflict-heading-highlight ((,class (:foreground ,tokyo-yellow :background ,tokyo-terminal-blk :extend t))))
+         `(magit-diff-conflict-heading-highlight ((,class (:foreground ,tokyo-yellow :background ,tokyo-bg-highlight :extend t))))
          `(magit-diff-revision-summary ((,class (:foreground ,tokyo-fg :weight bold))))
          `(magit-diff-revision-summary-highlight ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight :weight bold))))
          `(magit-diff-lines-heading ((,class (:foreground ,tokyo-bg :background ,tokyo-blue :extend t))))
