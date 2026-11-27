@@ -507,6 +507,24 @@ Light variant.")
          `(window-divider-first-pixel ((,class (:foreground ,tokyo-terminal-blk))))
          `(window-divider-last-pixel ((,class (:foreground ,tokyo-terminal-blk))))
          `(widget-field ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(help-key-binding ((,class (:inherit fixed-pitch :foreground ,tokyo-blue :background ,tokyo-bg-dark
+                                                  :box (:line-width -1 :color ,tokyo-bg-highlight)))))
+         `(nobreak-space ((,class (:foreground ,tokyo-cyan-pale :underline t))))
+         `(nobreak-hyphen ((,class (:foreground ,tokyo-cyan-pale))))
+         `(separator-line ((,class (:background ,tokyo-terminal-blk :height 0.1))))
+         `(tool-bar ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark))))
+         `(tty-menu-enabled-face ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark))))
+         `(tty-menu-disabled-face ((,class (:foreground ,tokyo-comment :background ,tokyo-bg-dark))))
+         `(tty-menu-selected-face ((,class (:foreground ,tokyo-fg :background ,tokyo-selection))))
+         `(minibuffer-nonselected ((,class (:foreground ,tokyo-bg :background ,tokyo-yellow))))
+         `(confusingly-reordered ((,class (:underline (:style wave :color ,tokyo-red-dark)))))
+         `(textsec-suspicious ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg))))
+         `(icon-button ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight
+                                             :box (:line-width -1 :color ,tokyo-terminal-blk)))))
+         `(emoji-with-derivations ((,class (:background ,tokyo-bg-highlight))))
+         `(widget-single-line-field ((,class (:background ,tokyo-bg-highlight))))
+         `(widget-button-pressed ((,class (:foreground ,tokyo-red))))
+         `(widget-documentation ((,class (:foreground ,tokyo-fg-dark))))
 
 ;;;;; fill-column-indicator
          `(fill-column-indicator ((,class (:foreground ,tokyo-indent :weight normal))))
@@ -615,6 +633,16 @@ Light variant.")
                                                      :box (:line-width 2 :color ,tokyo-terminal-blk :style released-button)))))
          `(custom-button-pressed ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight
                                                        :box (:line-width 2 :color ,tokyo-terminal-blk :style pressed-button)))))
+         `(custom-button-pressed-unraised ((,class (:foreground ,tokyo-magenta :underline t))))
+         `(custom-changed ((,class (:foreground ,tokyo-orange))))
+         `(custom-comment ((,class (:background ,tokyo-bg-highlight))))
+         `(custom-comment-tag ((,class (:foreground ,tokyo-fg-dark))))
+         `(custom-invalid ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg))))
+         `(custom-modified ((,class (:foreground ,tokyo-yellow))))
+         `(custom-rogue ((,class (:foreground ,tokyo-red :background ,tokyo-bg-dark))))
+         `(custom-set ((,class (:foreground ,tokyo-blue))))
+         `(custom-themed ((,class (:foreground ,tokyo-teal))))
+         `(custom-variable-obsolete ((,class (:foreground ,tokyo-comment))))
 
 ;;;;; diff
          `(diff-added ((,class (:foreground ,tokyo-fg :background ,tokyo-diff-add-bg :extend t))))
@@ -630,6 +658,8 @@ Light variant.")
          `(diff-indicator-removed ((,class (:foreground ,tokyo-git-delete))))
          `(diff-indicator-changed ((,class (:foreground ,tokyo-git-change))))
          `(diff-nonexistent ((,class (:foreground ,tokyo-comment))))
+         `(diff-changed-unspecified ((,class (:background ,tokyo-diff-chg-bg :extend t))))
+         `(diff-error ((,class (:foreground ,tokyo-red-dark :weight bold))))
 
 ;;;;; dired
          `(dired-directory ((,class (:foreground ,tokyo-blue :weight bold))))
@@ -656,6 +686,10 @@ Light variant.")
          `(ediff-odd-diff-A ((,class (:background ,tokyo-bg-highlight :extend t))))
          `(ediff-odd-diff-B ((,class (:background ,tokyo-bg-highlight :extend t))))
          `(ediff-odd-diff-C ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(ediff-current-diff-Ancestor ((,class (:background ,tokyo-selection :extend t))))
+         `(ediff-fine-diff-Ancestor ((,class (:foreground ,tokyo-fg :background ,tokyo-selection :weight bold :extend t))))
+         `(ediff-even-diff-Ancestor ((,class (:background ,tokyo-bg-highlight :extend t))))
+         `(ediff-odd-diff-Ancestor ((,class (:background ,tokyo-bg-highlight :extend t))))
 
 ;;;;; eshell
          `(eshell-prompt ((,class (:foreground ,tokyo-blue :weight bold))))
@@ -690,6 +724,7 @@ Light variant.")
          `(erc-prompt-face ((,class (:foreground ,tokyo-blue :weight bold))))
          `(erc-timestamp-face ((,class (:foreground ,tokyo-dark5))))
          `(erc-underline-face ((,class (:underline t))))
+         `(erc-dangerous-host-face ((,class (:foreground ,tokyo-red))))
 
 ;;;;; flymake
          `(flymake-error ((,class (:underline (:style wave :color ,tokyo-red-dark)))))
@@ -726,6 +761,30 @@ Light variant.")
          `(gnus-summary-normal-ticked ((,class (:foreground ,tokyo-fg-dark :slant italic))))
          `(gnus-summary-normal-unread ((,class (:foreground ,tokyo-fg :weight bold))))
          `(gnus-summary-selected ((,class (:foreground ,tokyo-blue :weight bold :underline t))))
+         `(gnus-cite-1 ((,class (:foreground ,tokyo-blue))))
+         `(gnus-cite-2 ((,class (:foreground ,tokyo-magenta))))
+         `(gnus-cite-3 ((,class (:foreground ,tokyo-teal))))
+         `(gnus-cite-4 ((,class (:foreground ,tokyo-orange))))
+         `(gnus-cite-5 ((,class (:foreground ,tokyo-green))))
+         `(gnus-cite-6 ((,class (:foreground ,tokyo-cyan))))
+         `(gnus-cite-7 ((,class (:foreground ,tokyo-yellow))))
+         `(gnus-cite-8 ((,class (:foreground ,tokyo-red))))
+         `(gnus-cite-9 ((,class (:foreground ,tokyo-blue))))
+         `(gnus-cite-10 ((,class (:foreground ,tokyo-magenta))))
+         `(gnus-cite-11 ((,class (:foreground ,tokyo-teal))))
+         `(gnus-emphasis-highlight-words ((,class (:foreground ,tokyo-bg :background ,tokyo-yellow))))
+         `(gnus-server-agent ((,class (:foreground ,tokyo-cyan :weight bold))))
+         `(gnus-server-closed ((,class (:foreground ,tokyo-comment :slant italic))))
+         `(gnus-server-cloud ((,class (:foreground ,tokyo-teal :weight bold))))
+         `(gnus-server-cloud-host ((,class (:foreground ,tokyo-bg :background ,tokyo-teal))))
+         `(gnus-server-denied ((,class (:foreground ,tokyo-red :weight bold))))
+         `(gnus-server-offline ((,class (:foreground ,tokyo-yellow :weight bold))))
+         `(gnus-server-opened ((,class (:foreground ,tokyo-green :weight bold))))
+         `(gnus-splash ((,class (:foreground ,tokyo-comment))))
+         `(gnus-summary-normal-undownloaded ((,class (:foreground ,tokyo-fg-dark))))
+         `(mm-command-output ((,class (:foreground ,tokyo-green))))
+         `(mm-uu-extract ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark :extend t))))
+         `(spam ((,class (:foreground ,tokyo-comment))))
 
 ;;;;; grep
          `(grep-context-face ((,class (:foreground ,tokyo-fg-dark))))
@@ -741,6 +800,8 @@ Light variant.")
          `(hi-blue-b ((,class (:foreground ,tokyo-blue :weight bold))))
          `(hi-green-b ((,class (:foreground ,tokyo-green :weight bold))))
          `(hi-red-b ((,class (:foreground ,tokyo-red :weight bold))))
+         `(hi-aquamarine ((,class (:foreground ,tokyo-bg :background ,tokyo-teal))))
+         `(hi-salmon ((,class (:foreground ,tokyo-bg :background ,tokyo-orange))))
 
 ;;;;; hl-line
          `(hl-line ((,class (:background ,tokyo-bg-line :extend t))))
@@ -751,6 +812,8 @@ Light variant.")
 ;;;;; icomplete
          `(icomplete-first-match ((,class (:foreground ,tokyo-green :weight bold))))
          `(icomplete-selected-match ((,class (:background ,tokyo-bg-highlight))))
+         `(icomplete-vertical-selected-prefix-indicator-face ((,class (:foreground ,tokyo-blue :weight bold))))
+         `(icomplete-vertical-unselected-prefix-indicator-face ((,class (:foreground ,tokyo-comment))))
 
 ;;;;; ido
          `(ido-first-match ((,class (:foreground ,tokyo-green :weight bold))))
@@ -919,6 +982,27 @@ Light variant.")
          `(org-agenda-done ((,class (:foreground ,tokyo-green))))
          `(org-agenda-structure ((,class (:foreground ,tokyo-magenta :weight bold))))
          `(org-agenda-current-time ((,class (:foreground ,tokyo-cyan))))
+         `(org-agenda-dimmed-todo-face ((,class (:foreground ,tokyo-comment))))
+         `(org-agenda-restriction-lock ((,class (:background ,tokyo-bg-highlight))))
+         `(org-beamer-tag ((,class (:box (:line-width 1 :color ,tokyo-comment)))))
+         `(org-clock-overlay ((,class (:foreground ,tokyo-fg :background ,tokyo-selection))))
+         `(org-column ((,class (:background ,tokyo-bg-dark))))
+         `(org-column-title ((,class (:background ,tokyo-bg-dark :weight bold :underline t))))
+         `(org-date-selected ((,class (:foreground ,tokyo-bg :background ,tokyo-cyan))))
+         `(org-dispatcher-highlight ((,class (:foreground ,tokyo-yellow :background ,tokyo-bg-highlight :weight bold))))
+         `(org-headline-todo ((,class (:foreground ,tokyo-orange))))
+         `(org-latex-and-related ((,class (:foreground ,tokyo-orange))))
+         `(org-mode-line-clock-overrun ((,class (:foreground ,tokyo-red :weight bold))))
+         `(org-sexp-date ((,class (:foreground ,tokyo-cyan))))
+         `(org-table-header ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight :weight bold))))
+         `(org-habit-clear-face ((,class (:background ,tokyo-blue7))))
+         `(org-habit-clear-future-face ((,class (:background ,tokyo-bg-highlight))))
+         `(org-habit-ready-face ((,class (:background ,tokyo-git-add))))
+         `(org-habit-ready-future-face ((,class (:background ,tokyo-diff-add-bg))))
+         `(org-habit-alert-face ((,class (:foreground ,tokyo-bg :background ,tokyo-yellow))))
+         `(org-habit-alert-future-face ((,class (:foreground ,tokyo-bg :background ,tokyo-orange))))
+         `(org-habit-overdue-face ((,class (:background ,tokyo-git-delete))))
+         `(org-habit-overdue-future-face ((,class (:background ,tokyo-diff-del-bg))))
 
 ;;;;; outline
          `(outline-1 ((,class (:inherit ,vpitch :foreground ,tokyo-heading1 :weight bold :height ,h1))))
@@ -941,6 +1025,12 @@ Light variant.")
          `(ruler-mode-column-number ((,class (:foreground ,tokyo-fg-dark))))
          `(ruler-mode-current-column ((,class (:foreground ,tokyo-yellow :weight bold))))
          `(ruler-mode-fill-column ((,class (:foreground ,tokyo-red))))
+         `(ruler-mode-comment-column ((,class (:inherit ruler-mode-default :foreground ,tokyo-magenta))))
+         `(ruler-mode-fringes ((,class (:inherit ruler-mode-default :foreground ,tokyo-green))))
+         `(ruler-mode-goal-column ((,class (:inherit ruler-mode-default :foreground ,tokyo-orange))))
+         `(ruler-mode-margins ((,class (:inherit ruler-mode-default :foreground ,tokyo-fg))))
+         `(ruler-mode-pad ((,class (:inherit ruler-mode-default :background ,tokyo-bg-highlight))))
+         `(ruler-mode-tab-stop ((,class (:inherit ruler-mode-default :foreground ,tokyo-blue))))
 
 ;;;;; sh-mode
          `(sh-heredoc ((,class (:foreground ,tokyo-green :slant italic))))
@@ -970,6 +1060,9 @@ Light variant.")
          `(tab-line-tab-current ((,class (:foreground ,tokyo-fg :background ,tokyo-bg :weight bold))))
          `(tab-line-tab-inactive ((,class (:foreground ,tokyo-dark5 :background ,tokyo-bg-dark))))
          `(tab-line-highlight ((,class (:background ,tokyo-bg-highlight))))
+         `(tab-bar-tab-highlight ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight))))
+         `(tab-line-tab-inactive-alternate ((,class (:foreground ,tokyo-dark5 :background ,tokyo-bg-darkest))))
+         `(tab-line-close-highlight ((,class (:foreground ,tokyo-red))))
 
 ;;;;; term / ansi-term / vterm
          `(term ((,class (:foreground ,tokyo-fg :background ,tokyo-bg))))
@@ -994,6 +1087,7 @@ Light variant.")
          `(whitespace-tab ((,class (:foreground ,tokyo-whitespace))))
          `(whitespace-trailing ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg))))
          `(whitespace-big-indent ((,class (:foreground ,tokyo-orange :background ,tokyo-bg-highlight))))
+         `(whitespace-missing-newline-at-eof ((,class (:foreground ,tokyo-bg :background ,tokyo-yellow))))
 
 ;;;;; woman
          `(woman-bold ((,class (:foreground ,tokyo-blue :weight bold))))
@@ -1057,6 +1151,8 @@ Light variant.")
                                                  :box (:line-width -1 :color ,tokyo-terminal-blk)))))
          `(eww-form-submit ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight
                                                  :box (:line-width -1 :color ,tokyo-dark5)))))
+         `(eww-form-file ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight
+                                               :box (:line-width -1 :color ,tokyo-dark5)))))
 
 ;;;;; man
          `(Man-overstrike ((,class (:foreground ,tokyo-blue :weight bold))))
@@ -1067,9 +1163,26 @@ Light variant.")
          `(proced-mark ((,class (:foreground ,tokyo-orange :weight bold))))
          `(proced-marked ((,class (:foreground ,tokyo-magenta :weight bold))))
          `(proced-sort-header ((,class (:foreground ,tokyo-blue :weight bold :underline t))))
+         `(proced-cpu ((,class (:foreground ,tokyo-magenta :weight bold))))
+         `(proced-emacs-pid ((,class (:foreground ,tokyo-magenta-hot))))
+         `(proced-executable ((,class (:foreground ,tokyo-blue))))
+         `(proced-interruptible-sleep-status-code ((,class (:foreground ,tokyo-comment))))
+         `(proced-mem ((,class (:foreground ,tokyo-magenta))))
+         `(proced-memory-high-usage ((,class (:foreground ,tokyo-red))))
+         `(proced-memory-low-usage ((,class (:foreground ,tokyo-green))))
+         `(proced-memory-medium-usage ((,class (:foreground ,tokyo-yellow))))
+         `(proced-pgrp ((,class (:foreground ,tokyo-teal))))
+         `(proced-pid ((,class (:foreground ,tokyo-cyan))))
+         `(proced-ppid ((,class (:foreground ,tokyo-cyan))))
+         `(proced-run-status-code ((,class (:foreground ,tokyo-green))))
+         `(proced-sess ((,class (:foreground ,tokyo-teal))))
+         `(proced-session-leader-pid ((,class (:foreground ,tokyo-cyan :underline t))))
+         `(proced-time-colon ((,class (:foreground ,tokyo-comment))))
+         `(proced-uninterruptible-sleep-status-code ((,class (:foreground ,tokyo-red))))
 
 ;;;;; pulse
          `(pulse-highlight-start-face ((,class (:background ,tokyo-blue-dark))))
+         `(pulse-highlight-face ((,class (:background ,tokyo-blue-dark))))
 
 ;;;;; speedbar
          `(speedbar-button-face ((,class (:foreground ,tokyo-green))))
@@ -1090,6 +1203,8 @@ Light variant.")
          `(vc-needs-update-state ((,class (:foreground ,tokyo-orange))))
          `(vc-removed-state ((,class (:foreground ,tokyo-red))))
          `(vc-up-to-date-state ((,class (:foreground ,tokyo-green))))
+         `(log-view-file ((,class (:foreground ,tokyo-blue :weight bold :extend t))))
+         `(log-view-message ((,class (:foreground ,tokyo-magenta :weight bold :extend t))))
 
 ;;;;; diff-hl
          `(diff-hl-change ((,class (:foreground ,tokyo-git-change))))
@@ -1104,6 +1219,123 @@ Light variant.")
          `(smerge-refined-added ((,class (:foreground ,tokyo-green :background ,tokyo-diff-add-bg :weight bold :extend t))))
          `(smerge-refined-removed ((,class (:foreground ,tokyo-red :background ,tokyo-diff-del-bg :weight bold :extend t))))
          `(smerge-refined-changed ((,class (:foreground ,tokyo-blue :background ,tokyo-diff-chg-bg :weight bold :extend t))))
+
+;;;;; cperl-mode
+         `(cperl-array-face ((,class (:foreground ,tokyo-cyan))))
+         `(cperl-hash-face ((,class (:foreground ,tokyo-orange))))
+         `(cperl-nonoverridable-face ((,class (:foreground ,tokyo-magenta))))
+
+;;;;; cua
+         `(cua-global-mark ((,class (:foreground ,tokyo-bg :background ,tokyo-yellow))))
+         `(cua-rectangle ((,class (:foreground ,tokyo-fg :background ,tokyo-selection))))
+         `(cua-rectangle-noselect ((,class (:foreground ,tokyo-fg-dark :background ,tokyo-bg-highlight))))
+
+;;;;; edebug
+         `(edebug-disabled-breakpoint ((,class (:background ,tokyo-diff-add-bg :extend t))))
+
+;;;;; edmacro
+         `(edmacro-label ((,class (:foreground ,tokyo-blue :weight bold))))
+
+;;;;; elisp-mode
+         `(elisp-condition ((,class (:foreground ,tokyo-red))))
+         `(elisp-major-mode-name ((,class (:foreground ,tokyo-green))))
+         `(elisp-non-local-exit ((,class (:inherit elisp-function :underline (:color ,tokyo-red)))))
+         `(elisp-rx ((,class (:foreground ,tokyo-cyan-ice))))
+         `(elisp-shorthand-font-lock-face ((,class (:foreground ,tokyo-cyan))))
+         `(elisp-symbol-at-mouse ((,class (:background ,tokyo-bg-highlight))))
+         `(elisp-symbol-role ((,class (:foreground ,tokyo-blue))))
+         `(elisp-symbol-role-definition ((,class (:foreground ,tokyo-blue))))
+         `(elisp-unknown-call ((,class (:foreground ,tokyo-fg-dark))))
+
+;;;;; ert / testcover
+         `(ert-test-result-expected ((,class (:foreground ,tokyo-bg :background ,tokyo-green))))
+         `(ert-test-result-unexpected ((,class (:foreground ,tokyo-bg :background ,tokyo-red))))
+         `(testcover-1value ((,class (:background ,tokyo-diff-chg-bg))))
+         `(testcover-nohits ((,class (:background ,tokyo-diff-del-bg))))
+
+;;;;; gdb
+         `(breakpoint-disabled ((,class (:foreground ,tokyo-comment))))
+         `(breakpoint-enabled ((,class (:foreground ,tokyo-red :weight bold))))
+
+;;;;; hexl
+         `(hexl-ascii-region ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight))))
+
+;;;;; highlight-changes
+         `(highlight-changes ((,class (:foreground ,tokyo-git-change))))
+         `(highlight-changes-delete ((,class (:foreground ,tokyo-git-delete :underline t))))
+
+;;;;; ibuffer
+         `(ibuffer-locked-buffer ((,class (:foreground ,tokyo-orange))))
+
+;;;;; image-dired
+         `(image-dired-thumb-flagged ((,class (:foreground ,tokyo-bg :background ,tokyo-red))))
+         `(image-dired-thumb-header-file-size ((,class (:foreground ,tokyo-cyan))))
+         `(image-dired-thumb-mark ((,class (:foreground ,tokyo-orange))))
+
+;;;;; make-mode
+         `(makefile-makepp-perl ((,class (:background ,tokyo-bg-highlight))))
+         `(makefile-space ((,class (:background ,tokyo-red))))
+
+;;;;; markdown-ts-mode
+         `(markdown-ts-code-block-markup-hidden ((,class (:background ,tokyo-bg-dark :extend t))))
+         `(markdown-ts-hard-line-break-space ((,class (:background ,tokyo-bg-highlight))))
+
+;;;;; nxml-mode
+         `(nxml-glyph ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight))))
+
+;;;;; package
+         `(package-mark-delete-line ((,class (:background ,tokyo-diff-del-bg :extend t))))
+         `(package-mark-install-line ((,class (:background ,tokyo-diff-add-bg :extend t))))
+
+;;;;; rcirc
+         `(rcirc-bright-nick ((,class (:foreground ,tokyo-cyan))))
+         `(rcirc-my-nick ((,class (:foreground ,tokyo-blue))))
+         `(rcirc-nick-in-message ((,class (:foreground ,tokyo-yellow))))
+         `(rcirc-other-nick ((,class (:foreground ,tokyo-teal))))
+         `(rcirc-prompt ((,class (:foreground ,tokyo-cyan))))
+         `(rcirc-server ((,class (:foreground ,tokyo-comment))))
+         `(rcirc-server-prefix ((,class (:foreground ,tokyo-comment))))
+
+;;;;; rst-mode
+         `(rst-level-1 ((,class (:foreground ,tokyo-heading1 :weight bold))))
+         `(rst-level-2 ((,class (:foreground ,tokyo-heading2 :weight bold))))
+         `(rst-level-3 ((,class (:foreground ,tokyo-heading3 :weight bold))))
+         `(rst-level-4 ((,class (:foreground ,tokyo-heading4 :weight bold))))
+         `(rst-level-5 ((,class (:foreground ,tokyo-heading5 :weight bold))))
+         `(rst-level-6 ((,class (:foreground ,tokyo-heading6 :weight bold))))
+
+;;;;; table
+         `(table-cell ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight))))
+
+;;;;; todo-mode
+         `(todo-archived-only ((,class (:foreground ,tokyo-comment))))
+         `(todo-button ((,class (:background ,tokyo-bg-highlight))))
+         `(todo-category-string ((,class (:foreground ,tokyo-blue))))
+         `(todo-comment ((,class (:foreground ,tokyo-comment))))
+         `(todo-diary-expired ((,class (:foreground ,tokyo-fg-dark))))
+         `(todo-done ((,class (:foreground ,tokyo-comment))))
+         `(todo-done-sep ((,class (:foreground ,tokyo-comment))))
+         `(todo-mark ((,class (:foreground ,tokyo-orange :weight bold))))
+         `(todo-nondiary ((,class (:foreground ,tokyo-green))))
+         `(todo-prefix-string ((,class (:foreground ,tokyo-teal))))
+         `(todo-search ((,class (:foreground ,tokyo-fg :background ,tokyo-selection))))
+         `(todo-sorted-column ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight))))
+         `(todo-top-priority ((,class (:foreground ,tokyo-orange))))
+
+;;;;; which-func
+         `(which-func ((,class (:foreground ,tokyo-blue))))
+
+;;;;; window-tool-bar
+         `(window-tool-bar-button ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight
+                                                        :box (:line-width -1 :style released-button)))))
+         `(window-tool-bar-button-hover ((,class (:foreground ,tokyo-fg :background ,tokyo-selection
+                                                              :box (:line-width -1 :style released-button)))))
+         `(window-tool-bar-button-checked ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight
+                                                                :box (:line-width -1 :style pressed-button)))))
+         `(window-tool-bar-button-checked-hover ((,class (:foreground ,tokyo-fg :background ,tokyo-selection
+                                                                      :box (:line-width -1 :style pressed-button)))))
+         `(window-tool-bar-button-disabled ((,class (:foreground ,tokyo-comment :background ,tokyo-bg-dark
+                                                                 :box (:line-width -1 :style released-button)))))
 
 ;;;; Third-party packages
 ;;;;; evil
