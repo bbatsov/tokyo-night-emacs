@@ -30,12 +30,24 @@
                               (tokyo-night-face-audit--colors (cdr form))))
         ((vectorp form) (tokyo-night-face-audit--colors (append form nil)))))
 
+(defvar tokyo-night-face-audit--aliases nil
+  "Alist of (FACE . OLD-NAME) for the obsolete face aliases seen so far.
+A theme that still uses the old name of a face does style it, since Emacs
+resolves the alias, so the audit has to know about these.")
+
 (defun tokyo-night-face-audit--scan-file (file)
   "Return a (FACE . COLORS) entry for every `defface' form in FILE.
-COLORS are the colors the face's default spec hardcodes, if any."
+COLORS are the colors the face's default spec hardcodes, if any.  Obsolete
+face aliases are recorded in `tokyo-night-face-audit--aliases' on the way."
   (with-temp-buffer
     (let ((jka-compr-verbose nil))
       (insert-file-contents file))
+    (while (re-search-forward
+            "(define-obsolete-face-alias[ \t\n]+'\\([^ \t\n]+\\)[ \t\n]+'\\([^ \t\n)]+\\)"
+            nil t)
+      (push (cons (intern (match-string 2)) (intern (match-string 1)))
+            tokyo-night-face-audit--aliases))
+    (goto-char (point-min))
     (let (faces)
       (while (re-search-forward "^[ \t]*(defface[ \t\n]" nil t)
         (let ((resume (point))
@@ -69,6 +81,15 @@ Some Emacs installations ship only the compiled files."
   (let ((source (locate-library "simple.el" t)))
     (and source (file-name-directory source))))
 
+(defun tokyo-night-face-audit--themed-p (theme face)
+  "Return non-nil if THEME styles FACE, under its name or an obsolete one."
+  (or (assq theme (get face 'theme-face))
+      (let (found)
+        (dolist (alias tokyo-night-face-audit--aliases found)
+          (when (and (eq (car alias) face)
+                     (assq theme (get (cdr alias) 'theme-face)))
+            (setq found t))))))
+
 (defun tokyo-night-face-audit-unthemed (theme faces)
   "Return the faces among FACES that hardcode a color THEME doesn't override.
 FACES is a list of (FACE . COLORS) entries, as returned by
@@ -76,7 +97,7 @@ FACES is a list of (FACE . COLORS) entries, as returned by
   (let (missing)
     (dolist (entry faces)
       (when (and (cdr entry)
-                 (not (assq theme (get (car entry) 'theme-face))))
+                 (not (tokyo-night-face-audit--themed-p theme (car entry))))
         (push (car entry) missing)))
     (sort (delete-dups missing) #'string<)))
 
