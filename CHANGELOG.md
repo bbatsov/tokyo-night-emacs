@@ -7,6 +7,7 @@
 * [#6](https://github.com/bbatsov/tokyo-night-emacs/pull/6): Add appearance options: customizable heading scale factors (`tokyo-night-height-1` through `-height-3` and `-height-doc-title`), `tokyo-night-use-variable-pitch`, `tokyo-night-italic-comments`, `tokyo-night-italic-keywords` and `tokyo-night-flat-mode-line`.
 * [#16](https://github.com/bbatsov/tokyo-night-emacs/pull/16): Theme about 180 built-in faces whose defaults hardcode colors from outside the palette: `help-key-binding`, the Customize state tags, the Ediff ancestor faces, `org-habit`, `org-column`, `proced`, `package`, `rcirc`, `todo-mode`, the Emacs 31 `elisp-*` faces and more.
 * [#17](https://github.com/bbatsov/tokyo-night-emacs/pull/17): Theme the remaining built-in faces that hardcode a color (`sieve`, ERC's header line and keep-place indicator, the key colors of the transient in Emacs 28 and 29, `diary-button`, `scroll-bar`), and have the test suite fail when a new Emacs brings in more of them.
+* [#18](https://github.com/bbatsov/tokyo-night-emacs/pull/18): Add support for helm, and theme the faces of magit, lsp-mode, corfu, vertico, company, flycheck and markdown-mode that still showed a color of their own, such as the `lsp-headerline-breadcrumb-*` diagnostics, `magit-diff-our-heading` and `corfu-quick1`.
 
 ### Bug fixes
 
