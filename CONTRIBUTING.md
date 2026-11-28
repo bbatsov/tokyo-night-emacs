@@ -26,6 +26,9 @@ request. Please, try to follow these guidelines when you do so.
 * Verify your Emacs Lisp code with `checkdoc` (`C-c ? d`).
 * Run the test suite with `eldev buttercup` and, where practical, add a
   test for the behavior you're changing.
+* Run `eldev audit-faces` when you work on the faces of a third-party
+  package. It lists the faces of the most popular packages that still show a
+  color of their own.
 * Add a before/after screenshot illustrating your changes visually.
 * [Squash related commits together][5].
 * Open a [pull request][6] that relates to *only* one subject with a clear title

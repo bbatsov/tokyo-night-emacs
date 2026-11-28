@@ -13,7 +13,13 @@
 ;;; Code:
 
 (require 'buttercup)
+(require 'seq)
 (require 'tokyo-night)
+(require 'tokyo-night-face-audit
+         (expand-file-name
+          "tokyo-night-face-audit.el"
+          (file-name-directory
+           (or load-file-name buffer-file-name default-directory))))
 
 ;; Make theme files loadable.
 (let ((dir (file-name-directory
@@ -840,5 +846,47 @@ DESIGN.md before reaching for the palette to close the gap.")
       (expect (tokyo-night-test--face-attr 'inf-ruby-result-overlay-face 'tokyo-night attr)
               :to-equal
               (tokyo-night-test--face-attr 'cider-result-overlay-face 'tokyo-night attr)))))
+
+;;; Built-in face audit
+;;
+;; The coverage list above only knows the faces someone thought to put in
+;; it.  This reads the `defface' forms of the Emacs running the suite and
+;; flags every face that hardcodes a color the theme doesn't override, so a
+;; new Emacs release can't quietly bring in faces that ignore the palette.
+
+(defconst tokyo-night-test--unthemed-built-in-faces
+  '(;; Colors that stand for themselves: mIRC color codes, the page of a
+    ;; document, an X-Face bitmap.
+    "\\`[bf]g:erc-color-face" "\\`doc-view-svg-face\\'" "\\`gnus-x-face\\'"
+    ;; Games.
+    "\\`gomoku-" "\\`mpuz-"
+    ;; Libraries with few users left, which aren't worth a palette mapping.
+    "\\`antlr-" "\\`cvs-" "\\`ebrowse-" "\\`eieio-custom-"
+    "\\`\\(?:emacs\\|etc\\)-authors-" "\\`erts-mode-" "\\`idlwave-"
+    "\\`newsticker-" "\\`prolog-" "\\`semantic-" "\\`senator-"
+    "\\`show-tabs-" "\\`srecode-" "\\`strokes-" "\\`vcursor\\'" "\\`vera-"
+    "\\`verilog-" "\\`vhdl-" "\\`viper-")
+  "Regexps matching the built-in faces the theme deliberately leaves alone.")
+
+(describe "built-in face audit"
+  (before-all
+    (tokyo-night-test--reload 'tokyo-night))
+  (after-all
+    (disable-theme 'tokyo-night))
+
+  (it "themes every face of Emacs that hardcodes a color"
+    (let ((directory (tokyo-night-face-audit-lisp-directory)))
+      (unless directory
+        (buttercup-skip "The Lisp sources of Emacs are not installed"))
+      (let ((faces (tokyo-night-face-audit-scan directory)))
+        ;; A scan that finds next to nothing would pass for the wrong reason.
+        (expect (length faces) :to-be-greater-than 500)
+        (expect (seq-remove
+                 (lambda (face)
+                   (seq-some (lambda (regexp)
+                               (string-match-p regexp (symbol-name face)))
+                             tokyo-night-test--unthemed-built-in-faces))
+                 (tokyo-night-face-audit-unthemed 'tokyo-night faces))
+                :to-equal nil)))))
 
 ;;; tokyo-night-test.el ends here

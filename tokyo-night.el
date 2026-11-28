@@ -513,6 +513,7 @@ Light variant.")
          `(nobreak-hyphen ((,class (:foreground ,tokyo-cyan-pale))))
          `(separator-line ((,class (:background ,tokyo-terminal-blk :height 0.1))))
          `(tool-bar ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark))))
+         `(scroll-bar ((,class (:foreground ,tokyo-comment :background ,tokyo-bg-dark))))
          `(tty-menu-enabled-face ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-dark))))
          `(tty-menu-disabled-face ((,class (:foreground ,tokyo-comment :background ,tokyo-bg-dark))))
          `(tty-menu-selected-face ((,class (:foreground ,tokyo-fg :background ,tokyo-selection))))
@@ -603,6 +604,7 @@ Light variant.")
          `(show-paren-match ((,class (:foreground ,tokyo-cyan-pale :background ,tokyo-bracket :weight bold))))
          `(show-paren-match-expression ((,class (:background ,tokyo-bg-highlight))))
          `(show-paren-mismatch ((,class (:foreground ,tokyo-red :background ,tokyo-bg-highlight :weight bold :underline t))))
+         `(blink-matching-paren-offscreen ((,class (:inherit show-paren-match))))
 
 ;;;;; completions
          `(completions-annotations ((,class (:foreground ,tokyo-comment))))
@@ -725,6 +727,11 @@ Light variant.")
          `(erc-timestamp-face ((,class (:foreground ,tokyo-dark5))))
          `(erc-underline-face ((,class (:underline t))))
          `(erc-dangerous-host-face ((,class (:foreground ,tokyo-red))))
+         `(erc-header-line ((,class (:foreground ,tokyo-fg :background ,tokyo-bg-highlight))))
+         `(erc-inverse-face ((,class (:foreground ,tokyo-bg :background ,tokyo-fg))))
+         `(erc-fill-wrap-merge-indicator-face ((,class (:foreground ,tokyo-comment))))
+         `(erc-keep-place-indicator-arrow ((,class (:foreground ,tokyo-green))))
+         `(erc-keep-place-indicator-line ((,class (:underline (:style wave :color ,tokyo-green)))))
 
 ;;;;; flymake
          `(flymake-error ((,class (:underline (:style wave :color ,tokyo-red-dark)))))
@@ -1036,6 +1043,12 @@ Light variant.")
          `(sh-heredoc ((,class (:foreground ,tokyo-green :slant italic))))
          `(sh-quoted-exec ((,class (:foreground ,tokyo-orange))))
 
+;;;;; sieve
+         `(sieve-control-commands ((,class (:foreground ,tokyo-magenta))))
+         `(sieve-action-commands ((,class (:foreground ,tokyo-blue))))
+         `(sieve-test-commands ((,class (:foreground ,tokyo-teal))))
+         `(sieve-tagged-arguments ((,class (:foreground ,tokyo-orange))))
+
 ;;;;; shr (eww/elfeed HTML rendering)
          `(shr-h1 ((,class (:inherit ,vpitch :foreground ,tokyo-heading1 :weight bold :height ,h1))))
          `(shr-h2 ((,class (:inherit ,vpitch :foreground ,tokyo-heading2 :weight bold :height ,h2))))
@@ -1109,6 +1122,7 @@ Light variant.")
          `(calendar-month-header ((,class (:foreground ,tokyo-magenta :weight bold))))
          `(holiday ((,class (:foreground ,tokyo-orange))))
          `(diary ((,class (:foreground ,tokyo-yellow))))
+         `(diary-button ((,class (:foreground ,tokyo-blue :underline t))))
 
 ;;;;; completion-preview
          `(completion-preview ((,class (:foreground ,tokyo-comment))))
@@ -1878,6 +1892,15 @@ Light variant.")
          `(transient-unreachable-key ((,class (:foreground ,tokyo-comment))))
          `(transient-nonstandard-key ((,class (:foreground ,tokyo-yellow :underline t))))
          `(transient-mismatched-key ((,class (:foreground ,tokyo-yellow :underline t))))
+         ;; The hydra-style key colors and the separator of the transient that
+         ;; shipped with Emacs 28 and 29.
+         `(transient-red ((,class (:foreground ,tokyo-red))))
+         `(transient-blue ((,class (:foreground ,tokyo-blue))))
+         `(transient-amaranth ((,class (:foreground ,tokyo-red-dark))))
+         `(transient-pink ((,class (:foreground ,tokyo-magenta-hot))))
+         `(transient-teal ((,class (:foreground ,tokyo-teal))))
+         `(transient-purple ((,class (:foreground ,tokyo-magenta))))
+         `(transient-separator ((,class (:background ,tokyo-bg-highlight :extend t))))
 
 ;;;;; vertico
          `(vertico-current ((,class (:background ,tokyo-bg-highlight :extend t))))
