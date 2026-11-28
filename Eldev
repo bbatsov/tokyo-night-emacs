@@ -15,3 +15,19 @@
 ;; no per-symbol suppression, and this is the only thing it reports for this
 ;; project, so checkdoc and relint do the linting.
 (setf eldev-lint-default '(doc re))
+
+;; The built-in faces are audited by the test suite.  Doing the same for
+;; third-party packages means installing them, so that part is a command to
+;; run by hand rather than something for CI.
+(eldev-defcommand tokyo-night-audit-faces (&rest parameters)
+  "Report the faces of popular third-party packages that hardcode a
+color the theme doesn't override.  With no PACKAGEs, audit the list in
+`tokyo-night-face-audit-packages'."
+  :command        audit-faces
+  :parameters     "[PACKAGE...]"
+  (eldev-call-process eldev-emacs-executable
+      `("--batch" "-Q" "-L" "." "-l" "test/tokyo-night-face-audit.el"
+        "--eval" ,(format "(progn (add-to-list 'custom-theme-load-path default-directory) (tokyo-night-face-audit-report 'tokyo-night '%S))"
+                          (mapcar #'intern parameters)))
+    :forward-output t
+    :die-on-error   t))
